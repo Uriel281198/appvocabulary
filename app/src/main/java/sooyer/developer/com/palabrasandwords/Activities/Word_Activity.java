@@ -1,7 +1,9 @@
 package sooyer.developer.com.palabrasandwords.Activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +25,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,15 +53,18 @@ import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
 public class Word_Activity extends AppCompatActivity {
+    Context context=this;
     FloatingActionButton fab ;
     private ListView lsWord;
     List<Word> wordList= new ArrayList<>();
     WordAdapter adapter;
     private Button btn;
     private Button btncancel;
-
+    private Button btntrasl;
+    public View mView;
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
+    EditText txttraduccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +87,26 @@ public class Word_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder mbuilder = new AlertDialog.Builder(Word_Activity.this);
-                final View mView = getLayoutInflater().inflate(R.layout.dialog_word, null);
+                mView = getLayoutInflater().inflate(R.layout.dialog_word, null);
                 mbuilder.setView(mView);
                 final AlertDialog dialog = mbuilder.create();
                 dialog.show();
 
                 btn = mView.findViewById(R.id.btn_mostrarinfo);
                 btncancel = mView.findViewById(R.id.btn_cancelar);
+                btntrasl = mView.findViewById(R.id.btn_traslate);
+                txttraduccion =  mView.findViewById(R.id.txttraduccion);
+
+                btntrasl.setOnClickListener(new View.OnClickListener() {
+                    EditText txtpalabra =  mView.findViewById(R.id.txtpalabra);
+                    String languagePair = "en-fr";
+                    @Override
+                    public void onClick(View v) {
+                        Translate(txtpalabra.getText().toString(),languagePair);
+                        Toast.makeText(Word_Activity.this, "lol", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 btn.setOnClickListener(new View.OnClickListener() {
                     EditText txtpalabra =  mView.findViewById(R.id.txtpalabra);
                     EditText txttraduccion =  mView.findViewById(R.id.txttraduccion);
@@ -123,12 +148,8 @@ public class Word_Activity extends AppCompatActivity {
                                     }
                                 });
                         dialog.dismiss();
-
                     }
-
-
                 });
-
                 btncancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -138,8 +159,10 @@ public class Word_Activity extends AppCompatActivity {
             }
         });
     }
-    public void close(AlertDialog dial){
 
+    void Translate(String textToBeTranslated,String languagePair){
+        TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
+        translatorBackgroundTask.execute(textToBeTranslated,languagePair);
     }
     private void loadData() {
         Disposable disposable = wordRepository.getAllWord()
@@ -345,6 +368,83 @@ public class Word_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
+    }
+
+
+    public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
+        //Declare Context
+        Context ctx;
+
+        //Set Context
+        public TranslatorBackgroundTask(Context ctx) {
+            this.ctx = ctx;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            //String variables
+            String textToBeTranslated = params[0];
+            String languagePair = params[1];
+
+            String jsonString;
+
+            try {
+                //Set up the translation call URL
+                String yandexKey = "trnsl.1.1.20190515T160909Z.009c417fac077dbe.57dfb0e48a7e5a2d5ec60abe061552bcc9145f28";
+                String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexKey
+                        + "&text=" + textToBeTranslated + "&lang=" + languagePair;
+                URL yandexTranslateURL = new URL(yandexUrl);
+
+                //Set Http Conncection, Input Stream, and Buffered Reader
+                HttpURLConnection httpJsonConnection = (HttpURLConnection) yandexTranslateURL.openConnection();
+                InputStream inputStream = httpJsonConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                //Set string builder and insert retrieved JSON result into it
+                StringBuilder jsonStringBuilder = new StringBuilder();
+                while ((jsonString = bufferedReader.readLine()) != null) {
+                    jsonStringBuilder.append(jsonString + "\n");
+                }
+
+                //Close and disconnect
+                bufferedReader.close();
+                inputStream.close();
+                httpJsonConnection.disconnect();
+
+                //Making result human readable
+                String resultString = jsonStringBuilder.toString().trim();
+                //Getting the characters between [ and ]
+                resultString = resultString.substring(resultString.indexOf('[') + 1);
+                resultString = resultString.substring(0, resultString.indexOf("]"));
+                //Getting the characters between " and "
+                resultString = resultString.substring(resultString.indexOf("\"") + 1);
+                resultString = resultString.substring(0, resultString.indexOf("\""));
+
+                Log.d("Translation Result:", resultString);
+                //return jsonStringBuilder.toString().trim();
+                return  resultString;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            txttraduccion.setText(result);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
     }
 }
 

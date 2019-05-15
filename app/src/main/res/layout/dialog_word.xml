@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    >
+
+    <EditText
+        android:hint="Palabra"
+        android:id="@+id/txtpalabra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="Traduccion ejemplo"
+        android:id="@+id/txttraduccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:hint="Ejemplo"
+        android:id="@+id/txtejemplo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <Button
+        android:id="@+id/btn_traslate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Traslate"
+        />
+        <Button
+            android:id="@+id/btn_mostrarinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            />
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            />
+
+
+</LinearLayout>
