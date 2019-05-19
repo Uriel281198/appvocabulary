@@ -4,12 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,14 +15,11 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,11 +29,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -52,18 +44,31 @@ import sooyer.developer.com.palabrasandwords.Local.WordDatabase;
 import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
+
+
 public class Word_Activity extends AppCompatActivity {
-    Context context=this;
-    FloatingActionButton fab ;
+
+
+    final String LANGUAGE_PAIR =  "en-es";
     private ListView lsWord;
     List<Word> wordList= new ArrayList<>();
     WordAdapter adapter;
-    private Button btn;
-    private Button btncancel;
-    private Button btntrasl;
-    public View mView;
+
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
+
+    Context context=this;
+
+
+    FloatingActionButton fab ;
+    private Button btnSend;
+    private Button btnCancel;
+    private Button btnTras;
+
+
+    public View mView;
+    EditText txtpalabra;
+    EditText txtejemplo;
     EditText txttraduccion;
 
     @Override
@@ -92,35 +97,37 @@ public class Word_Activity extends AppCompatActivity {
                 final AlertDialog dialog = mbuilder.create();
                 dialog.show();
 
-                btn = mView.findViewById(R.id.btn_mostrarinfo);
-                btncancel = mView.findViewById(R.id.btn_cancelar);
-                btntrasl = mView.findViewById(R.id.btn_traslate);
+                btnSend = mView.findViewById(R.id.btn_mostrarinfo);
+                btnCancel = mView.findViewById(R.id.btn_cancelar);
+                btnTras = mView.findViewById(R.id.btn_traslate);
                 txttraduccion =  mView.findViewById(R.id.txttraduccion);
+                txtpalabra =  mView.findViewById(R.id.txtpalabra);
+                txtejemplo = mView.findViewById(R.id.txtejemplo);
 
-                btntrasl.setOnClickListener(new View.OnClickListener() {
-                    EditText txtpalabra =  mView.findViewById(R.id.txtpalabra);
-                    String languagePair = "en-fr";
+
+                btnTras.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Translate(txtpalabra.getText().toString(),languagePair);
-                        Toast.makeText(Word_Activity.this, "lol", Toast.LENGTH_SHORT).show();
+                        if (!TextUtils.isEmpty(txtpalabra.getText())){
+                            Translate(txtpalabra.getText().toString(),LANGUAGE_PAIR);
+                            Toast.makeText(Word_Activity.this, "lol", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
-                btn.setOnClickListener(new View.OnClickListener() {
-                    EditText txtpalabra =  mView.findViewById(R.id.txtpalabra);
-                    EditText txttraduccion =  mView.findViewById(R.id.txttraduccion);
-                    EditText txtejemplo = mView.findViewById(R.id.txtejemplo);
+                btnSend.setOnClickListener(new View.OnClickListener() {
+
 
                     @Override
                     public void onClick(View v) {
                         if (TextUtils.isEmpty(txtejemplo.getText()))
-                            txtejemplo.setText("There aren´t example");
+                            txtejemplo.setText("There aren´t examples");
 
                         Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
                             @Override
                             public void subscribe(ObservableEmitter<Object> e) throws Exception {
-
                                 Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(), txtejemplo.getText().toString());
                                 wordList.add(word);
                                 wordRepository.insertWord(word);
@@ -136,7 +143,7 @@ public class Word_Activity extends AppCompatActivity {
                                         Toast.makeText(Word_Activity.this, "Sucecfully", Toast.LENGTH_SHORT).show();
                                         Log.e("lolllll",""+wordList.toString());
                                     }
-                                }, new Consumer<Throwable>() {
+                                },new Consumer<Throwable>() {
                                     @Override
                                     public void accept(Throwable throwable) throws Exception {
                                         Toast.makeText(Word_Activity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
@@ -150,7 +157,7 @@ public class Word_Activity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-                btncancel.setOnClickListener(new View.OnClickListener() {
+                btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
@@ -160,7 +167,7 @@ public class Word_Activity extends AppCompatActivity {
         });
     }
 
-    void Translate(String textToBeTranslated,String languagePair){
+    private void Translate(String textToBeTranslated,String languagePair){
         TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
         translatorBackgroundTask.execute(textToBeTranslated,languagePair);
     }
@@ -369,8 +376,6 @@ public class Word_Activity extends AppCompatActivity {
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
-
-
     public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
         //Declare Context
         Context ctx;
@@ -420,7 +425,7 @@ public class Word_Activity extends AppCompatActivity {
                 resultString = resultString.substring(resultString.indexOf("\"") + 1);
                 resultString = resultString.substring(0, resultString.indexOf("\""));
 
-                Log.d("Translation Result:", resultString);
+                Log.d("Translation Resultaaa:", resultString);
                 //return jsonStringBuilder.toString().trim();
                 return  resultString;
             } catch (MalformedURLException e) {
