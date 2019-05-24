@@ -38,6 +38,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import sooyer.developer.com.palabrasandwords.Adapters.WordAdapter;
+import sooyer.developer.com.palabrasandwords.Common.Common;
 import sooyer.developer.com.palabrasandwords.Database.WordRepository;
 import sooyer.developer.com.palabrasandwords.Local.WordDataSource;
 import sooyer.developer.com.palabrasandwords.Local.WordDatabase;
@@ -48,17 +49,15 @@ import sooyer.developer.com.palabrasandwords.R;
 
 public class Word_Activity extends AppCompatActivity {
 
-    final String LANGUAGE_PAIR =  "en-es";
     private ListView lsWord;
-    List<Word> wordList= new ArrayList<>();
-    WordAdapter adapter;
+    private List<Word> wordList= new ArrayList<>();
+    private WordAdapter adapter;
 
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
 
-    Context context=this;
-
-    FloatingActionButton fab ;
+    private Context context=this;
+    private FloatingActionButton fab ;
     private Button btnSend;
     private Button btnCancel;
     private Button btnTras;
@@ -75,8 +74,10 @@ public class Word_Activity extends AppCompatActivity {
         setToolbar("INSERT",false);
 
         compositeDisposable= new CompositeDisposable();
+
         lsWord= findViewById(R.id.lsWord);
         fab = findViewById(R.id.fab_button);
+
         adapter = new WordAdapter(getApplicationContext(),wordList);
         registerForContextMenu(lsWord);
         lsWord.setAdapter(adapter);
@@ -94,23 +95,14 @@ public class Word_Activity extends AppCompatActivity {
                 final AlertDialog dialog = mbuilder.create();
                 dialog.show();
 
-                btnSend = mView.findViewById(R.id.btn_mostrarinfo);
-                btnCancel = mView.findViewById(R.id.btn_cancelar);
-                btnTras = mView.findViewById(R.id.btn_traslate);
-                txttraduccion =  mView.findViewById(R.id.txttraduccion);
-                txtpalabra =  mView.findViewById(R.id.txtpalabra);
-                txtejemplo = mView.findViewById(R.id.txtejemplo);
-
-
+                getIds();
                 btnTras.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!TextUtils.isEmpty(txtpalabra.getText())){
-                            Translate(txtpalabra.getText().toString(),LANGUAGE_PAIR);
-                            Toast.makeText(Word_Activity.this, "lol", Toast.LENGTH_SHORT).show();
-                        }else{
+                        if (!TextUtils.isEmpty(txtpalabra.getText()))
+                            Translate(txtpalabra.getText().toString(), Common.LANGUAGE_PAIR);
+                        else
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
 
@@ -159,7 +151,21 @@ public class Word_Activity extends AppCompatActivity {
                     }
                 });
             }
+
+            public void getIds(){
+                btnSend = mView.findViewById(R.id.btn_mostrarinfo);
+                btnCancel = mView.findViewById(R.id.btn_cancelar);
+                btnTras = mView.findViewById(R.id.btn_traslate);
+                txttraduccion =  mView.findViewById(R.id.txttraduccion);
+                txtpalabra =  mView.findViewById(R.id.txtpalabra);
+                txtejemplo = mView.findViewById(R.id.txtejemplo);
+            }
+
+            public void createPop(){
+
+            }
         });
+
     }
 
     private void Translate(String textToBeTranslated,String languagePair){

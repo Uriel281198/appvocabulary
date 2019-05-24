@@ -19,11 +19,24 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setToolbar("Palabras and Works",false);
+        setToolbar("Vocabulario and Vocabary",false);
         categoryAdapterList =  new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerCategory);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        full_list();
+        CategoryAdapter adapter = new CategoryAdapter(this,categoryAdapterList);
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    public void setToolbar(String name,Boolean up){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(up);
+    }
+    public void full_list(){
         categoryAdapterList.add( new Category ("My Words",R.drawable.lista,40,R.drawable.gradientcrojo,R.color.colorRojo));
         categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irregular,40,R.drawable.gradientcazul,R.color.colorAzul));
         categoryAdapterList.add( new Category ("Home",R.drawable.home,40,R.drawable.gradientcmorado,R.color.colorMorado));
@@ -33,13 +46,5 @@ public class HomeActivity extends AppCompatActivity {
         categoryAdapterList.add( new Category ("Apperance",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
 
 
-        CategoryAdapter adapter = new CategoryAdapter(this,categoryAdapterList);
-        recyclerView.setAdapter(adapter);
-    }
-    public void setToolbar(String name,Boolean up){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(name);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
 }

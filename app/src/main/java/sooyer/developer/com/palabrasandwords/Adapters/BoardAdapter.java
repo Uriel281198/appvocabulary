@@ -1,6 +1,7 @@
 package sooyer.developer.com.palabrasandwords.Adapters;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +26,7 @@ import sooyer.developer.com.palabrasandwords.R;
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
     private Context nCtx;
     private List<Board> BoardList;
-    SoundPool soundPool;
+    SoundPool sp;
     int audio [ ] = {R.raw.sound,R.raw.sound_short};
     int sonido;
     ItemClickListener itemClickListener;
@@ -33,9 +35,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public BoardAdapter(Context nCtx, List<Board> boardList) {
         this.nCtx = nCtx;
         this.BoardList = boardList;
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(10)
-                .build();
+
 
     }
 
@@ -51,16 +51,43 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
         final Board board = BoardList.get(position);
         holder.name.setText(board.getPalabra());
         holder.traduccion.setText(board.getTraduccion());
+        final LayoutInflater inflater = LayoutInflater.from(nCtx);
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                AlertDialog.Builder alertdialog = new AlertDialog.Builder(nCtx);
-                alertdialog.setTitle("Your title");
-                alertdialog.setMessage("your message ");
-
-
-                AlertDialog dialog = alertdialog.create();
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
+                View vista = inflater.inflate(R.layout.dialog_board,null);
+                mbuilder.setView(vista);
+                final AlertDialog dialog = mbuilder.create();
                 dialog.show();
+                TextView txtp =  vista.findViewById(R.id.txtpalabra_board);
+                TextView txtt =  vista.findViewById(R.id.txttraduccion_board);
+                TextView txte =  vista.findViewById(R.id.txtejemplo_board);
+                Button btn = vista.findViewById(R.id.btn_sound);
+                txtp.setText(board.getPalabra());
+                txtt.setText(board.getTraduccion());
+                txte.setText(board.getEjemplo());
+
+                AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build();
+
+                sp = new SoundPool.Builder()
+                        .setMaxStreams(10)
+                        .build();
+
+                sonido = sp.load(nCtx,board.getAudio(),1);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(nCtx, "gig", Toast.LENGTH_SHORT).show();
+                        sp.play(sonido,1,1,1,1,1);
+                    }
+                });
+
+
 /*
                 Intent go_detail = new Intent(nCtx, DetailBoardActivity.class);
                 go_detail.putExtra("wo",board.getPalabra());
@@ -75,7 +102,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     }
     public int  musica(){
         int audio [ ] = {R.raw.sound,R.raw.sound_short};
-        int sonido = soundPool.load(nCtx,audio[0],1);
+
         return  sonido;
     }
     //Toast.makeText(nCtx, "clicked"+position, Toast.LENGTH_SHORT).show();
