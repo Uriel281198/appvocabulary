@@ -24,16 +24,14 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerCategory);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
-        categoryAdapterList.add( new Category ("My Words",R.drawable.word,40,R.drawable.gradientcrojo,R.color.colorRojo));
-        categoryAdapterList.add( new Category ("People",R.drawable.famyly,40,R.drawable.gradientcazul,R.color.colorAzul));
-        categoryAdapterList.add( new Category ("Apperance",R.drawable.ic_grupo,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("Home",R.drawable.ic_grupo,40,R.drawable.gradientcmorado,R.color.colorMorado));
-        categoryAdapterList.add( new Category ("Sport",R.drawable.ic_grupo,40,R.drawable.gradientcverde,R.color.colorVerde));
-        categoryAdapterList.add( new Category ("Fruits",R.drawable.ic_grupo,40,R.drawable.gradientcrojo,R.color.colorRojo));
-        categoryAdapterList.add( new Category ("Words more used",R.drawable.ic_grupo,40,R.drawable.gradientcazul,R.color.colorAzul));
-        categoryAdapterList.add( new Category ("Apperance",R.drawable.ic_grupo,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("Home",R.drawable.ic_grupo,40,R.drawable.gradientcmorado,R.color.colorMorado));
-        categoryAdapterList.add( new Category ("Sport",R.drawable.ic_grupo,40,R.drawable.gradientcverde,R.color.colorVerde));
+        categoryAdapterList.add( new Category ("My Words",R.drawable.lista,40,R.drawable.gradientcrojo,R.color.colorRojo));
+        categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irregular,40,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category ("Home",R.drawable.home,40,R.drawable.gradientcmorado,R.color.colorMorado));
+        categoryAdapterList.add( new Category ("Sport",R.drawable.sports,40,R.drawable.gradientcverde,R.color.colorVerde));
+        categoryAdapterList.add( new Category ("Fruits",R.drawable.fruits,40,R.drawable.gradientcrojo,R.color.colorRojo));
+        categoryAdapterList.add( new Category ("Words more used",R.drawable.popular,40,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category ("Apperance",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
+
 
         CategoryAdapter adapter = new CategoryAdapter(this,categoryAdapterList);
         recyclerView.setAdapter(adapter);

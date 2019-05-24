@@ -48,7 +48,6 @@ import sooyer.developer.com.palabrasandwords.R;
 
 public class Word_Activity extends AppCompatActivity {
 
-
     final String LANGUAGE_PAIR =  "en-es";
     private ListView lsWord;
     List<Word> wordList= new ArrayList<>();
@@ -59,12 +58,10 @@ public class Word_Activity extends AppCompatActivity {
 
     Context context=this;
 
-
     FloatingActionButton fab ;
     private Button btnSend;
     private Button btnCancel;
     private Button btnTras;
-
 
     public View mView;
     EditText txtpalabra;
@@ -118,8 +115,6 @@ public class Word_Activity extends AppCompatActivity {
                 });
 
                 btnSend.setOnClickListener(new View.OnClickListener() {
-
-
                     @Override
                     public void onClick(View v) {
                         if (TextUtils.isEmpty(txtejemplo.getText()))

@@ -9,11 +9,13 @@ public class Board
     private String palabra;
     private String traduccion;
     private String ejemplo;
+    private int audio;
 
-    public Board(String palabra, String traduccion, String ejemplo) {
+    public Board(String palabra, String traduccion, String ejemplo, int audio) {
         this.palabra = palabra;
         this.traduccion = traduccion;
         this.ejemplo = ejemplo;
+        this.audio = audio;
     }
 
     public String getPalabra() {
@@ -38,5 +40,13 @@ public class Board
 
     public void setEjemplo(String ejemplo) {
         this.ejemplo = ejemplo;
+    }
+
+    public int getAudio() {
+        return audio;
+    }
+
+    public void setAudio(int audio) {
+        this.audio = audio;
     }
 }

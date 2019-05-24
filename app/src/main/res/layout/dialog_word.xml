@@ -28,13 +28,13 @@
 
         <Button
         android:id="@+id/btn_traslate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Traslate"
         />
         <Button
             android:id="@+id/btn_mostrarinfo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send"
             />
@@ -45,6 +45,31 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             />
+    <TextView
+        android:text="Select a color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:background="@color/colorMorado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@color/colorGris"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@color/colorRojo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@color/colorVerde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </LinearLayout>

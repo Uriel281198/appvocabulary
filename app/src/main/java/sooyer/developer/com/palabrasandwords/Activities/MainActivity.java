@@ -3,9 +3,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
-
 import sooyer.developer.com.palabrasandwords.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
     TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -28,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },1000);/*
+        },1000);
+
+        /*
+
         textToBeTranslated = "Hello world, yeah I know it is stereotye.";
         languagePair = "en-fr"; //English to French ("<source_language>-<target_language>")
         //Executing the translation function

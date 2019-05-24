@@ -16,7 +16,7 @@ import sooyer.developer.com.palabrasandwords.Models.Category;
 import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
-public class BoardActivity extends AppCompatActivity {
+public class BoardActivity extends AppCompatActivity  {
     RecyclerView recyclerView;
     List<Board> boardAdapterList ;
     @Override
@@ -28,9 +28,32 @@ public class BoardActivity extends AppCompatActivity {
         boardAdapterList =  new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerboard);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        boardAdapterList.add(new Board("KNOW","Saber","I KNOW"));
-        boardAdapterList.add(new Board("KNOW","Saber","I KNOW"));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        boardAdapterList.add(new Board("KNOsdsW","Saber","I KNOW",R.raw.sound_short));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+
+        boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));boardAdapterList.add(new Board("Nose","Saber","I KNOW",R.raw.sound));
+
+
+
         BoardAdapter adapter = new BoardAdapter(this,boardAdapterList);
         recyclerView.setAdapter(adapter);
 
