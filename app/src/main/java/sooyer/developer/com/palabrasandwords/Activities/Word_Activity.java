@@ -53,19 +53,23 @@ public class Word_Activity extends AppCompatActivity {
     private List<Word> wordList= new ArrayList<>();
     private WordAdapter adapter;
 
+    //Base de datos
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
 
     private Context context=this;
     private FloatingActionButton fab ;
-    private Button btnSend;
-    private Button btnCancel;
-    private Button btnTras;
+    private Button btnSend,btnCancel,btnTras;
 
     public View mView;
-    EditText txtpalabra;
-    EditText txtejemplo;
-    EditText txttraduccion;
+    private EditText txtpalabra ,txtejemplo, txttraduccion;
+
+    private Button btncolor;
+    int color ;
+    int colorTexto;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,13 @@ public class Word_Activity extends AppCompatActivity {
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
                     }
                 });
+                btncolor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcmorado;
+                        colorTexto = R.color.colorMorado;
+                    }
+                });
 
                 btnSend.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -115,7 +126,7 @@ public class Word_Activity extends AppCompatActivity {
                         Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
                             @Override
                             public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(), txtejemplo.getText().toString());
+                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(), txtejemplo.getText().toString(),color,colorTexto);
                                 wordList.add(word);
                                 wordRepository.insertWord(word);
                                 e.onComplete();
@@ -159,11 +170,10 @@ public class Word_Activity extends AppCompatActivity {
                 txttraduccion =  mView.findViewById(R.id.txttraduccion);
                 txtpalabra =  mView.findViewById(R.id.txtpalabra);
                 txtejemplo = mView.findViewById(R.id.txtejemplo);
+                btncolor = mView.findViewById(R.id.send_purple);
             }
 
-            public void createPop(){
 
-            }
         });
 
     }

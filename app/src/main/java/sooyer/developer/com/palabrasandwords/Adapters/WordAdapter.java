@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,11 +47,12 @@ public class WordAdapter extends BaseAdapter {
         TextView lwpalabra = v.findViewById(R.id.lWPalabra);
         TextView lwtrad = v.findViewById(R.id.lWTraduccion);
         TextView lweje = v.findViewById(R.id.lWEjemplo);
-
+        ImageView backround = v.findViewById(R.id.imageView3);
+        backround.setImageDrawable(mcontext.getResources().getDrawable(mWordList.get(position).getColor()));
         lwpalabra.setText(mWordList.get(position).getWord());
+        lwpalabra.setTextColor(mcontext.getResources().getColor(mWordList.get(position).getTextcolor()));
         lwtrad.setText(mWordList.get(position).getTraslate());
         lweje.setText(mWordList.get(position).getExample());
-
         v.setTag(mWordList.get(position).getId());
 
         return v;

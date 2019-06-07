@@ -16,11 +16,11 @@
             android:id="@+id/background_board"
             android:layout_centerInParent="true"
             android:layout_alignParentStart="true"
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/gradientcrojo"
             />
-            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,24 +29,26 @@
             >
             <TextView
                 android:id="@+id/name_board"
+                android:layout_margin="5dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="25dp"
                 android:text="Family"
                 android:textStyle="bold"
+                android:fontFamily="serif-monospace"
                 android:textColor="#DA152B"
                 />
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:layout_margin="2dp"
                 android:id="@+id/traduccion"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="italic"
-                android:textColor="#DA152B"
+                android:textColor="#263238"
                 android:text="Familia"
                 />
         </LinearLayout>

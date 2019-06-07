@@ -26,14 +26,32 @@ public class Word  {
     @ColumnInfo(name = "example")
     private String example;
 
+    @ColumnInfo(name = "color")
+    private int color;
+
+
+    @ColumnInfo(name = "texto")
+    private int textcolor;
+
     public Word() {
     }
 
+    public int getTextcolor() {
+        return textcolor;
+    }
+
+    public void setTextcolor(int textcolor) {
+        this.textcolor = textcolor;
+    }
+
     @Ignore
-    public Word(String word, String traslate, String example) {
+    public Word(String word, String traslate, String example,int color,int textcolor) {
         this.word = word;
         this.traslate = traslate;
         this.example = example;
+        this.color = color;
+        this.textcolor = textcolor;
+
     }
 
     public String getWord() {
@@ -67,6 +85,14 @@ public class Word  {
     public void setId(int id) {
         this.id = id;
     }
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
 
     @Override
     public String toString() {

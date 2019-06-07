@@ -1,5 +1,9 @@
 package sooyer.developer.com.palabrasandwords.Common;
 
+import java.util.List;
+
+import sooyer.developer.com.palabrasandwords.Models.Board;
+
 /**
  * Created by Uriel on 24/05/2019.
  */
@@ -7,4 +11,8 @@ package sooyer.developer.com.palabrasandwords.Common;
 public class Common {
 
     public static final String LANGUAGE_PAIR =  "en-es";
+
+
+
+
 }

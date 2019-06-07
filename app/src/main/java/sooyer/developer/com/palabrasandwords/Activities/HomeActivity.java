@@ -13,7 +13,7 @@ import sooyer.developer.com.palabrasandwords.R;
 
 public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    List<Category> categoryAdapterList ;
+    ArrayList<Category> categoryAdapterList ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class HomeActivity extends AppCompatActivity {
         categoryAdapterList.add( new Category ("My Words",R.drawable.lista,40,R.drawable.gradientcrojo,R.color.colorRojo));
         categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irregular,40,R.drawable.gradientcazul,R.color.colorAzul));
         categoryAdapterList.add( new Category ("Home",R.drawable.home,40,R.drawable.gradientcmorado,R.color.colorMorado));
-        categoryAdapterList.add( new Category ("Sport",R.drawable.sports,40,R.drawable.gradientcverde,R.color.colorVerde));
-        categoryAdapterList.add( new Category ("Fruits",R.drawable.fruits,40,R.drawable.gradientcrojo,R.color.colorRojo));
+        categoryAdapterList.add( new Category ("Dining Room",R.drawable.sports,40,R.drawable.gradientcverde,R.color.colorVerde));
+        categoryAdapterList.add( new Category ("Kithen",R.drawable.fruits,40,R.drawable.gradientcrojo,R.color.colorRojo));
         categoryAdapterList.add( new Category ("Words more used",R.drawable.popular,40,R.drawable.gradientcazul,R.color.colorAzul));
         categoryAdapterList.add( new Category ("Apperance",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
 
