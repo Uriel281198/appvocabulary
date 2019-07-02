@@ -5,29 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import  android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import sooyer.developer.com.palabrasandwords.Adapters.BoardAdapter;
-import sooyer.developer.com.palabrasandwords.Adapters.CategoryAdapter;
 import sooyer.developer.com.palabrasandwords.Models.Board;
-import sooyer.developer.com.palabrasandwords.Models.Category;
-import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
-public class BoardActivity extends AppCompatActivity  {
+public class BoardActivity extends AppCompatActivity  implements android.support.v7.widget.SearchView.OnQueryTextListener {
     RecyclerView recyclerView;
     ArrayList<Board> boardAdapterList ;
     BoardAdapter adapter;
@@ -48,27 +39,6 @@ public class BoardActivity extends AppCompatActivity  {
 
         adapter = new BoardAdapter(this,boardAdapterList);
         recyclerView.setAdapter(adapter);
-
-
-        EditText search = findViewById(R.id.search);
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                filter(s.toString());
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-
-
     }
 
     private  void filter(String text){
@@ -77,9 +47,7 @@ public class BoardActivity extends AppCompatActivity  {
             if (item.getPalabra().toUpperCase().contains(text.toUpperCase()) || item.getTraduccion().toUpperCase().contains(text.toUpperCase()) ) {
                 filter.add(item);
             }else if(text.isEmpty()){
-
             }
-
         }
         adapter.filterList(filter);
 
@@ -87,11 +55,40 @@ public class BoardActivity extends AppCompatActivity  {
 
 
     public void setToolbar(String name,Boolean up){
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        Toolbar toolbar =  findViewById(R.id.toolbarword);
+        TextView titulo = findViewById(R.id.titulowords);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorWhite));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(name);
+        titulo.setText(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbarmenu,menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toUpperCase();
+        ArrayList<Board> filter = new ArrayList<>();
+        for(Board item : boardAdapterList){
+            if (item.getPalabra().toUpperCase().contains(userInput.toUpperCase()) || item.getTraduccion().toUpperCase().contains(userInput.toUpperCase()) ) {
+                filter.add(item);
+            }else if(userInput.isEmpty()){
+            }
+        }
+        adapter.filterList(filter);
+        return true;
     }
 }

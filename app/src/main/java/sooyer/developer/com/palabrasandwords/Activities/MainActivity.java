@@ -1,5 +1,4 @@
 package sooyer.developer.com.palabrasandwords.Activities;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,10 +7,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         },1000);
-
     }
+
     public void showToas(){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_error_layout,(ViewGroup) findViewById(R.id.toast_root));

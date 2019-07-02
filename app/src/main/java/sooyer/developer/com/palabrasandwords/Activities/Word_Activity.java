@@ -65,29 +65,29 @@ public class Word_Activity extends AppCompatActivity {
     private EditText txtpalabra ,txtejemplo, txttraduccion;
 
     private Button btncolor;
-    int color ;
-    int colorTexto;
-
-
+    int color =       R.drawable.gradientcazul;
+    int colorTexto =  R.color.colorAzul;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_);
-        setToolbar("INSERT",false);
+        setToolbar("MY WORDS",true);
 
         compositeDisposable= new CompositeDisposable();
-
+        //Obtenicion id's
         lsWord= findViewById(R.id.lsWord);
         fab = findViewById(R.id.fab_button);
-
+        //Adapatador de palabras
         adapter = new WordAdapter(getApplicationContext(),wordList);
         registerForContextMenu(lsWord);
         lsWord.setAdapter(adapter);
 
+        //Database traer instancia
         WordDatabase wordDatabase = WordDatabase.getInstance(this);
         wordRepository = WordRepository.getIstance(WordDataSource.getIstance(wordDatabase.WordDAO()));
+        //Cargar datos de la bd
         loadData();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,6 @@ public class Word_Activity extends AppCompatActivity {
                 mbuilder.setView(mView);
                 final AlertDialog dialog = mbuilder.create();
                 dialog.show();
-
                 getIds();
                 btnTras.setOnClickListener(new View.OnClickListener() {
                     @Override

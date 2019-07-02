@@ -29,6 +29,7 @@ import sooyer.developer.com.palabrasandwords.R;
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
     private Context nCtx;
     private List<Board> BoardList;
+    private List<Board> BoardListFull;
     SoundPool sp;
     int audio [ ] = {R.raw.sound,R.raw.sound_short};
     int sonido;
@@ -38,7 +39,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public BoardAdapter(Context nCtx, List<Board> boardList) {
         this.nCtx = nCtx;
         this.BoardList = boardList;
-
 
     }
 
@@ -135,15 +135,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
             fondo = itemView.findViewById(R.id.background_board);
             itemView.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View v) {
             itemClickListener.onClick(v,getAdapterPosition());
         }
-
-
     }
-
-
+    public void updateList(List<Board> newList){
+        BoardList = newList;
+        notifyDataSetChanged();
+    }
 }
 

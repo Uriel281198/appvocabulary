@@ -4,7 +4,7 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true"
-    android:layout_height="80dp"
+    android:layout_height="85dp"
     android:layout_margin="10dp"
     android:layout_width="match_parent">
 
@@ -17,10 +17,9 @@
             android:layout_centerInParent="true"
             android:layout_alignParentStart="true"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:background="@drawable/gradientcrojo"
             />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +33,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
+                android:textSize="22sp"
                 android:text="Family"
                 android:textStyle="bold"
                 android:fontFamily="serif-monospace"
