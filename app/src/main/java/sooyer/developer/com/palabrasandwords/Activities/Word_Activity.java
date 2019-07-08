@@ -3,9 +3,12 @@ package sooyer.developer.com.palabrasandwords.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,7 +67,13 @@ public class Word_Activity extends AppCompatActivity {
     public View mView;
     private EditText txtpalabra ,txtejemplo, txttraduccion;
 
-    private Button btncolor;
+    private Button btnmorado;
+    private Button btngris;
+    private Button btnrojo;
+    private Button btnverde;
+    private Button btnazul;
+
+    private int indice = 0;
     int color =       R.drawable.gradientcazul;
     int colorTexto =  R.color.colorAzul;
 
@@ -74,7 +83,6 @@ public class Word_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_);
         setToolbar("MY WORDS",true);
-
         compositeDisposable= new CompositeDisposable();
         //Obtenicion id's
         lsWord= findViewById(R.id.lsWord);
@@ -96,7 +104,10 @@ public class Word_Activity extends AppCompatActivity {
                 AlertDialog.Builder mbuilder = new AlertDialog.Builder(Word_Activity.this);
                 mView = getLayoutInflater().inflate(R.layout.dialog_word, null);
                 mbuilder.setView(mView);
+
                 final AlertDialog dialog = mbuilder.create();
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
                 getIds();
                 btnTras.setOnClickListener(new View.OnClickListener() {
@@ -108,19 +119,84 @@ public class Word_Activity extends AppCompatActivity {
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
                     }
                 });
-                btncolor.setOnClickListener(new View.OnClickListener() {
+                btnmorado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        color =R.drawable.gradientcmorado;
-                        colorTexto = R.color.colorMorado;
+                            btnmorado.setBackgroundResource(R.drawable.shape_colorselecc);
+                            btngris.setBackgroundResource(R.drawable.shape_gris);
+                            btnazul.setBackgroundResource(R.drawable.shape_blue);
+                            btnrojo.setBackgroundResource(R.drawable.shape_red);
+                            btnverde.setBackgroundResource(R.drawable.shape_green);
+                            color =R.drawable.gradientcmorado;
+                            colorTexto = R.color.colorMorado;
+
+
+
                     }
                 });
+                btngris.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_grisselecc);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
+                        //btngris.setBackgroundColor(ContextCompat.getColor(getBaseContext(),));
+                        //btngris.setBackground(getResources().getDrawable(R.drawable.shape_grisselecc));
+                        btngris.setBackgroundResource(R.drawable.shape_grisselecc);
+                        color =R.drawable.gradientcgris;
+                        colorTexto = R.color.colorGris;
+                    }
+                });
+                btnrojo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcrojo;
+                        colorTexto = R.color.colorRojo;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_redselecc);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
+
+                    }
+                });
+                btnverde.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcverde;
+                        colorTexto = R.color.colorVerde;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_greenselecc);
+
+                    }
+                });
+                btnazul.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcazul;
+                        colorTexto = R.color.colorAzul;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blueselecc);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
+
+                    }
+                });
+
 
                 btnSend.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (TextUtils.isEmpty(txtejemplo.getText()))
                             txtejemplo.setText("There aren´t examples");
+                        if (TextUtils.isEmpty(txtpalabra.getText()))
+                            Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
 
                         Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
                             @Override
@@ -161,7 +237,6 @@ public class Word_Activity extends AppCompatActivity {
                     }
                 });
             }
-
             public void getIds(){
                 btnSend = mView.findViewById(R.id.btn_mostrarinfo);
                 btnCancel = mView.findViewById(R.id.btn_cancelar);
@@ -169,12 +244,13 @@ public class Word_Activity extends AppCompatActivity {
                 txttraduccion =  mView.findViewById(R.id.txttraduccion);
                 txtpalabra =  mView.findViewById(R.id.txtpalabra);
                 txtejemplo = mView.findViewById(R.id.txtejemplo);
-                btncolor = mView.findViewById(R.id.send_purple);
+                btnmorado = mView.findViewById(R.id.send_purple);
+                btngris = mView.findViewById(R.id.send_gray);
+                btnrojo = mView.findViewById(R.id.send_red);
+                btnverde = mView.findViewById(R.id.send_green);
+                btnazul = mView.findViewById(R.id.send_blue);
             }
-
-
         });
-
     }
 
     private void Translate(String textToBeTranslated,String languagePair){

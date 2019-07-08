@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    android:background="@drawable/gradientcgris"
+    android:background="@drawable/shapedialog"
     >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:textColorHint="#607d8b"
+            android:background="@drawable/inputword"
+            android:hint="Word in English"
+            android:padding="15dp"
+            android:id="@+id/txtpalabra"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <Button
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/btn_traslate"
+            android:background="@drawable/traductor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            />
+
+    </LinearLayout>
 
     <EditText
-        android:hint="Palabra"
-        android:id="@+id/txtpalabra"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:hint="Traduccion ejemplo"
+        android:textColorHint="#607d8b"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/inputword"
+        android:hint="Traslate word "
         android:id="@+id/txttraduccion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
+        android:layout_height="50dp" />
     <EditText
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/inputword"
         android:hint="Ejemplo"
         android:id="@+id/txtejemplo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
     <TextView
         android:text="Select a color"
         android:textSize="26sp"
@@ -32,47 +56,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
+            ></ScrollView>
         <Button
             android:id="@+id/send_purple"
-            android:background="@drawable/shape_color"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_color" />
         <Button
-            android:background="@color/colorGris"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/send_gray"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_gris" />
+
         <Button
-            android:background="@color/colorRojo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/send_red"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_red"/>
+
         <Button
-            android:background="@color/colorVerde"
+            android:id="@+id/send_green"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_green" />
+        <Button
+            android:id="@+id/send_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_blue" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:background="@drawable/shape_button"
+            android:id="@+id/btn_mostrarinfo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Send" />
     </LinearLayout>
     <Button
-        android:id="@+id/btn_traslate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Traslate"
-        />
-    <Button
-        android:id="@+id/btn_mostrarinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        />
-
-    <Button
+        android:textStyle="bold"
+        android:textColor="#ffff"
         android:id="@+id/btn_cancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:background="@drawable/shape_buttoncolor"
         />
-
-
-
 </LinearLayout>

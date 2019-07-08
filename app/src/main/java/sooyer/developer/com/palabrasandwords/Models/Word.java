@@ -29,7 +29,6 @@ public class Word  {
     @ColumnInfo(name = "color")
     private int color;
 
-
     @ColumnInfo(name = "texto")
     private int textcolor;
 

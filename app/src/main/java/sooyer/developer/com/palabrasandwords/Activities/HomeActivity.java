@@ -37,13 +37,13 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
     public void full_list(){
-        categoryAdapterList.add( new Category ("My Words",R.drawable.lista,40,R.drawable.gradientcrojo,R.color.colorRojo));
-        categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irregular,40,R.drawable.gradientcazul,R.color.colorAzul));
-        categoryAdapterList.add( new Category ("Home",R.drawable.home,40,R.drawable.gradientcmorado,R.color.colorMorado));
-        categoryAdapterList.add( new Category ("Dining Room",R.drawable.sports,40,R.drawable.gradientcverde,R.color.colorVerde));
-        categoryAdapterList.add( new Category ("Kithen",R.drawable.fruits,40,R.drawable.gradientcrojo,R.color.colorRojo));
-        categoryAdapterList.add( new Category ("Words more used",R.drawable.popular,40,R.drawable.gradientcazul,R.color.colorAzul));
-        categoryAdapterList.add( new Category ("Apperance",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
+        categoryAdapterList.add( new Category ("My Words",R.drawable.lista, 2,R.drawable.gradientcrojo,R.color.colorRojo));
+        categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irre,101,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category ("Home",R.drawable.home,24,R.drawable.gradientcmorado,R.color.colorMorado));
+        categoryAdapterList.add( new Category ("Dining Room",R.drawable.dinning,18,R.drawable.gradientcverde,R.color.colorVerde));
+        categoryAdapterList.add( new Category ("Kitchen",R.drawable.kitchen,35,R.drawable.gradientcrojo,R.color.colorRojo));
+        categoryAdapterList.add( new Category ("ADVERBSOFTIME",R.drawable.time,30,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
 
 
     }
