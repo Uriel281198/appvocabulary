@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     tools:context="sooyer.developer.com.palabrasandwords.Activities.HomeActivity">
     <include layout="@layout/toolbarlayout"
+        android:id="@+id/toolbarrrr"
         ></include>
-    <android.support.v7.widget.RecyclerView
-        android:layout_margin="2dp"
-        android:id="@+id/recyclerCategory"
+
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_below="@+id/toolbarrrr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+
+
+    <com.luseen.spacenavigation.SpaceNavigationView
+
+        android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        app:active_item_color="@color/colorWhite"
+        app:centre_button_color="@android:color/white"
+        app:inactive_item_color="@android:color/white"
+        app:space_background_color="@color/colorPrimary"
+        app:centre_button_icon="@drawable/mas"
+        app:space_item_icon_size="@dimen/space_item_icon_default_size"
+        app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
+        app:space_item_text_size="@dimen/space_item_text_default_size"
+        android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>

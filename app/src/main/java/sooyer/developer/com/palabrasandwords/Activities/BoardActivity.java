@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +18,14 @@ import java.util.List;
 import sooyer.developer.com.palabrasandwords.Adapters.BoardAdapter;
 import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
+import sooyer.developer.com.palabrasandwords.Util.MySpanSizeLookup;
 
 public class BoardActivity extends AppCompatActivity  implements android.support.v7.widget.SearchView.OnQueryTextListener {
     RecyclerView recyclerView;
     ArrayList<Board> boardAdapterList ;
     BoardAdapter adapter;
+
+    private GridLayoutManager gridLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +39,10 @@ public class BoardActivity extends AppCompatActivity  implements android.support
 
         recyclerView = findViewById(R.id.recyclerboard);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        //gridLayoutManager = new GridLayoutManager(this,2, LinearLayoutManager.VERTICAL,false);
 
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+      //  gridLayoutManager.setSpanSizeLookup(new MySpanSizeLookup(7,1,2));
         adapter = new BoardAdapter(this,boardAdapterList);
         recyclerView.setAdapter(adapter);
     }
@@ -70,6 +76,16 @@ public class BoardActivity extends AppCompatActivity  implements android.support
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);
+
+        MenuItem hidden = menu.findItem(R.id.action_hidden);
+
+        hidden.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return true;
+            }
+        });
+
         return true;
     }
 

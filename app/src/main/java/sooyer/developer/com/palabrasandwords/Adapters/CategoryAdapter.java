@@ -57,6 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         Category category = categoryList.get(position);
         holder.name.setText(category.getName().toUpperCase());
         holder.total.setText(String.valueOf(category.getTotal()));
+        holder.total.setTextColor(nCtx.getResources().getColor(category.getColor()));
         holder.background.setImageDrawable(nCtx.getResources().getDrawable(category.getBackground(),null));
         holder.icon.setImageDrawable(nCtx.getResources().getDrawable(category.getIcon(),null));
         holder.name.setTextColor(nCtx.getResources().getColor(category.getColor()));
@@ -106,53 +107,62 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
     public void irregularVerbs() {
         lista = new ArrayList<>();
+
         lista.add(new Board("BE",    "SER/ESTAR/EXISTIR", "I KNOW", sounds[0], color[0],        coloText[0]));
         lista.add(new Board("BEAT",  "BATIR/RITMO/GOLPEAR", "I KNOW", sounds[1], color[0],      coloText[0]));
         lista.add(new Board("BECOME","VOLVERSE/CONVERTIRSE", "I KNOW", sounds[2], color[0],     coloText[0]));
         lista.add(new Board("BEGIN", "EMPEZAR/COMENZAR", "I KNOW", sounds[3], color[0],         coloText[0]));
         lista.add(new Board("BEND",  "CURVA/DOBLAR", "I KNOW", sounds[4], color[0],             coloText[0]));
         lista.add(new Board("BET",   "APUESTA/APOSTAR", "I KNOW", sounds[5], color[0],          coloText[0]));
+
         lista.add(new Board("BITE",  "MORDEDURA/BOCADO", "I KNOW", sounds[6], color[1], coloText[1]));
         lista.add(new Board("BLOW",  "SOPLO/VOLAR/SOPLAR", "I KNOW", sounds[7], color[1], coloText[1]));
         lista.add(new Board("BREAK", "DESCANSO/ROMPER", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BRING", "TRAER/LLEVAR/PROVOCAR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BUILD", "CONSTRUIR/EDIFICAR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BURST", "RAFAGA/EXPLOSION", "I KNOW", sounds[0], color[1], coloText[1]));
+
         lista.add(new Board("BUY",   "COMPRAR/SOBORNAR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("CAN",   "PODER/SABER", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("CATCH", "CAPTURA/COGER/ATRAPAR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("CHOOSE","ESCOGER/ELEGIR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("COME",  "VEN/VENIR/LLEGAR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("COST",  "COSTO/COSTAR/PRECIO", "I KNOW", sounds[0], color[2], coloText[2]));
+
         lista.add(new Board("CUT",   "CORTAR/REDUCIR/RECORTAR", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("DEAL",  "ACUERDO/NEGOCIAR", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("DIG",   "CAVAR/EXCAVAR/REMOVER", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("DO",    "HACER/REALIZAR/ACTUAR", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("DRAW",  "DIBUJAR/SACAR/TRAZAR", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("DRINK", "DRINK/TOMAR/EMPINAR", "I KNOW", sounds[0], color[3], coloText[3]));
+
         lista.add(new Board("EAT",   "COMER/CONSUMIR/DEVORAR", "I KNOW", sounds[0], color[4], coloText[4]));
         lista.add(new Board("FALL",  "CAER/BAJAR/OTOÑO", "I KNOW", sounds[0], color[4], coloText[4]));
         lista.add(new Board("FEED",  "ALIMENTAR/DAR DE COMER", "I KNOW", sounds[0], color[4], coloText[4]));
         lista.add(new Board("FEEL",  "SENTIR/SENSACION/PALPAR", "I KNOW", sounds[0], color[4], coloText[4]));
         lista.add(new Board("FIGHT", "LUCHAR/COMBATIR", "I KNOW", sounds[0], color[4], coloText[4]));
         lista.add(new Board("FIND",  "ENCONTRAR/HALLAR", "I KNOW", sounds[0], color[4], coloText[4]));
+
         lista.add(new Board("FLY",   "VOLAR/HUIR/PILOTEAR", "I KNOW", sounds[0], color[0],  coloText[0]));
         lista.add(new Board("FORGET","OLVIDAR/DEJAR", "I KNOW", sounds[0], color[0],        coloText[0]));
         lista.add(new Board("FORGIVE","PERDONAR/DISCULPAR", "I KNOW", sounds[0], color[0],  coloText[0]));
         lista.add(new Board("FREEZE","CONGELAR/CONGELARSE", "I KNOW", sounds[0], color[0],  coloText[0]));
         lista.add(new Board("GET",   "OBTENER/CONSEGUIR", "I KNOW", sounds[0], color[0],    coloText[0]));
+        lista.add(new Board("IS TIME OF TEST",  "GO TO TEST", "I KNOW", sounds[6], color[0], coloText[0]));
         lista.add(new Board("GIVE",  "DAR/OFRECER/PRESTAR", "I KNOW", sounds[0], color[0],  coloText[0]));
         lista.add(new Board("GO",    "IR/PASAR/SALIR", "I KNOW", sounds[0], color[1],       coloText[1]));
         lista.add(new Board("GROW",  "CRECER/CULTIVAR/CRIAR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("HANG",  "COLGAR/MANIR", "", sounds[0], color[1], coloText[1]));
         lista.add(new Board("HAVE",  "TENER/HABER/POSEER", "I KNOW", sounds[0], color[1],    coloText[1]));
         lista.add(new Board("HEAR",  "OIR", "I KNOW", sounds[0], color[1], coloText[1]));
+
         lista.add(new Board("HIDE",  "ESCONDER/DISIMULAR", "I KNOW", sounds[0], color[1],   coloText[1]));
         lista.add(new Board("HIT",   "GOLPEAR/GOLPE/IMPACTO", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("HOLD",  "SONTENER/MANTENER", "I KNOW", sounds[0], color[2],        coloText[2]));
         lista.add(new Board("HURT",  "HERIR/DAÑO/LASTIMAR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("KEEP",  "MANTENER/TENER/GUARDAR", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("KNOW",  "SABER/CONOCER", "I KNOW", sounds[0], color[2], coloText[2]));
+
         lista.add(new Board("LAY",   "TUMBAR A", "I KNOW", sounds[0], color[2], coloText[2]));
         lista.add(new Board("LEAD",  "DIRIGIR", "I KNOW", sounds[0], color[3], coloText[3]));
         lista.add(new Board("LEAVE", "SALIR/DEJAR", "I KNOW", sounds[0], color[3], coloText[3]));
@@ -388,6 +398,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         return categoryList.size();
     }
 
+
+
+    
 
 
 

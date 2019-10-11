@@ -11,7 +11,7 @@ import sooyer.developer.com.palabrasandwords.Models.Board;
 public class Common {
 
     public static final String LANGUAGE_PAIR =  "en-es";
-
+    public static Boolean istrue = true;
 
 
 

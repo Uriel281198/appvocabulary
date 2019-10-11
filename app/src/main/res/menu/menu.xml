@@ -7,9 +7,15 @@
         app:showAsAction="ifRoom"
         android:id="@+id/clear"
         android:icon="@drawable/ic_delete"
-
         android:title="Clear"
         />
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/show"
+        android:icon="@drawable/mas"
+        android:title="Show"
+    />
 
 
 

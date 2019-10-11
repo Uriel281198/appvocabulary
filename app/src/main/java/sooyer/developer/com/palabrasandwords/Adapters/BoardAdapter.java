@@ -21,10 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sooyer.developer.com.palabrasandwords.Activities.DetailBoardActivity;
+import sooyer.developer.com.palabrasandwords.Activities.TestActivity;
 import sooyer.developer.com.palabrasandwords.Activities.Word_Activity;
 import sooyer.developer.com.palabrasandwords.Interface.ItemClickListener;
 import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
+
+import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
     private Context nCtx;
@@ -53,47 +56,60 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
         final Board board = BoardList.get(position);
         holder.name.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
         holder.name.setText(board.getPalabra().toUpperCase());
-        holder.traduccion.setText(board.getTraduccion().toUpperCase());
+
+
+            holder.traduccion.setText(board.getTraduccion().toUpperCase());
+
         holder.fondo.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 
         final LayoutInflater inflater = LayoutInflater.from(nCtx);
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
-                View vista = inflater.inflate(R.layout.dialog_board,null);
-                mbuilder.setView(vista);
-                final AlertDialog dialog = mbuilder.create();
-                dialog.show();
-                TextView txtp =  vista.findViewById(R.id.txtpalabra_board);
-                TextView txtt =  vista.findViewById(R.id.txttraduccion_board);
-                TextView txte =  vista.findViewById(R.id.txtejemplo_board);
-                ImageView img = vista.findViewById(R.id.dialog_back);
-                Button btn = vista.findViewById(R.id.btn_sound);
-                txtp.setText(board.getPalabra().toUpperCase());
-                txtp.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
-                txtt.setText(board.getTraduccion().toUpperCase());
-                txte.setText(board.getEjemplo());
-                img.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 
-                AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .build();
+                if (position == 0){
 
-                sp = new SoundPool.Builder()
-                        .setMaxStreams(150)
-                        .build();
+                   // Intent go_detail = new Intent(nCtx, TestActivity.class);
+                    //nCtx.startActivity(go_detail);
 
-                sonido = sp.load(nCtx,board.getAudio(),1);
+                }else{
+                    AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
+                    View vista = inflater.inflate(R.layout.dialog_board,null);
+                    mbuilder.setView(vista);
+                    final AlertDialog dialog = mbuilder.create();
+                    dialog.show();
+                    TextView txtp =  vista.findViewById(R.id.txtpalabra_board);
+                    TextView txtt =  vista.findViewById(R.id.txttraduccion_board);
+                    TextView txte =  vista.findViewById(R.id.txtejemplo_board);
+                    ImageView img = vista.findViewById(R.id.dialog_back);
+                    Button btn = vista.findViewById(R.id.btn_sound);
+                    txtp.setText(board.getPalabra().toUpperCase());
+                    txtp.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
+                    txtt.setText(board.getTraduccion().toUpperCase());
+                    txte.setText(board.getEjemplo());
+                    img.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(nCtx, "gig", Toast.LENGTH_SHORT).show();
-                        sp.play(sonido,1,1,1,0,1);
-                    }
-                });
+                    AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .build();
+
+                    sp = new SoundPool.Builder()
+                            .setMaxStreams(150)
+                            .build();
+
+                    sonido = sp.load(nCtx,board.getAudio(),1);
+
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(nCtx, "gig", Toast.LENGTH_SHORT).show();
+                            sp.play(sonido,1,1,1,0,1);
+                        }
+                    });
+
+
+                }
 
 
 /*

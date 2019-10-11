@@ -3,6 +3,7 @@ package sooyer.developer.com.palabrasandwords.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -32,6 +33,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -48,24 +51,27 @@ import sooyer.developer.com.palabrasandwords.Local.WordDatabase;
 import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
+import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
 
 
 public class Word_Activity extends AppCompatActivity {
 
+    //List y adapters
     private ListView lsWord;
     private List<Word> wordList= new ArrayList<>();
     private WordAdapter adapter;
 
-    //Base de datos
+    //Base de datos Local
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
 
     private Context context=this;
+
     private FloatingActionButton fab ;
     private Button btnSend,btnCancel,btnTras;
 
     public View mView;
-    private EditText txtpalabra ,txtejemplo, txttraduccion;
+    private EditText txtpalabra , txttraduccion;
 
     private Button btnmorado;
     private Button btngris;
@@ -193,15 +199,14 @@ public class Word_Activity extends AppCompatActivity {
                 btnSend.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (TextUtils.isEmpty(txtejemplo.getText()))
-                            txtejemplo.setText("There aren´t examples");
+
                         if (TextUtils.isEmpty(txtpalabra.getText()))
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
 
                         Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
                             @Override
                             public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(), txtejemplo.getText().toString(),color,colorTexto);
+                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(),color,colorTexto);
                                 wordList.add(word);
                                 wordRepository.insertWord(word);
                                 e.onComplete();
@@ -243,7 +248,7 @@ public class Word_Activity extends AppCompatActivity {
                 btnTras = mView.findViewById(R.id.btn_traslate);
                 txttraduccion =  mView.findViewById(R.id.txttraduccion);
                 txtpalabra =  mView.findViewById(R.id.txtpalabra);
-                txtejemplo = mView.findViewById(R.id.txtejemplo);
+
                 btnmorado = mView.findViewById(R.id.send_purple);
                 btngris = mView.findViewById(R.id.send_gray);
                 btnrojo = mView.findViewById(R.id.send_red);
@@ -251,6 +256,22 @@ public class Word_Activity extends AppCompatActivity {
                 btnazul = mView.findViewById(R.id.send_blue);
             }
         });
+
+        cargarpreferencias();
+    }
+
+    private void cargarpreferencias() {
+        SharedPreferences preferences = getSharedPreferences("istrue",MODE_PRIVATE);
+        Boolean valor = preferences.getBoolean("esverdad",true);
+        istrue = valor;
+    }
+
+    private void guardarpreferencia(){
+        SharedPreferences preferences = getSharedPreferences("istrue",MODE_PRIVATE);
+        Boolean valor = istrue;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("esverdad",valor);
+        editor.commit();
     }
 
     private void Translate(String textToBeTranslated,String languagePair){
@@ -296,6 +317,18 @@ public class Word_Activity extends AppCompatActivity {
         {
             case R.id.clear:
                 deleteallUser();
+            break;
+            case R.id.show:
+                Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show();
+                if (istrue != false){
+                    istrue = false;
+
+                    adapter.notifyDataSetChanged();
+                }else if (istrue !=true){
+
+                    istrue = true;
+                    adapter.notifyDataSetChanged();
+                }
             break;
         }
         return super.onOptionsItemSelected(item);
@@ -465,11 +498,13 @@ public class Word_Activity extends AppCompatActivity {
     public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
         //Declare Context
         Context ctx;
+        android.app.AlertDialog alertDialog;
 
         //Set Context
         public TranslatorBackgroundTask(Context ctx) {
             this.ctx = ctx;
         }
+
 
         @Override
         protected String doInBackground(String... params) {
@@ -525,11 +560,17 @@ public class Word_Activity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+             alertDialog= new
+                    SpotsDialog.Builder().setContext(ctx).build();
+            alertDialog.setTitle("Tralate");
+            alertDialog.setMessage("Please wait.....");
+            alertDialog.show();
         }
 
         @Override
         protected void onPostExecute(String result) {
             txttraduccion.setText(result);
+            alertDialog.dismiss();
         }
 
         @Override
