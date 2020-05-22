@@ -8,13 +8,10 @@
     android:layout_height="85dp"
     android:layout_margin="10dp"
     android:layout_width="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
-
         <ImageView
             android:id="@+id/imageView3"
             android:layout_centerInParent="true"
@@ -23,9 +20,6 @@
             android:layout_height="85dp"
             android:background="@drawable/gradientcrojo"
             />
-
-
-
         <TextView
             android:layout_above="@id/lWTraduccion"
             android:layout_centerHorizontal="true"
@@ -36,6 +30,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Family"
+            android:letterSpacing="0.2"
             android:textStyle="bold"
             android:fontFamily="serif-monospace"
             android:textColor="#DA152B"

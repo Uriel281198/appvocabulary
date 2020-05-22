@@ -1,15 +1,11 @@
 package sooyer.developer.com.palabrasandwords.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -21,9 +17,9 @@ import sooyer.developer.com.palabrasandwords.Activities.Word_Activity;
 import sooyer.developer.com.palabrasandwords.Interface.ItemClickListener;
 import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.Models.Category;
-import sooyer.developer.com.palabrasandwords.ViewHolders.*;
+import sooyer.developer.com.palabrasandwords.Models.Verbs;
 import sooyer.developer.com.palabrasandwords.R;
-
+import sooyer.developer.com.palabrasandwords.ViewHolders.CategoryViewHolder;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
     private Context nCtx;
@@ -39,7 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
 
     List<Board> lista;
-
+    List<Verbs> verbs;
     public CategoryAdapter(Context nCtx, List<Category> categoryList) {
         this.nCtx = nCtx;
         this.categoryList = categoryList;
@@ -51,6 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         View view = inflater.inflate(sooyer.developer.com.palabrasandwords.R.layout.layout_item_categorias,null);
         return new  CategoryViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
@@ -72,32 +69,33 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
                     case 1:
                         irregularVerbs();
                         gotoBoard(nCtx,lista,"IRREGULAR VERBS");
-
                         break;
                     case 2:
-                        Home();
-                        gotoBoard(nCtx,lista,"HOME");
+
 
                         break;
                     case 3:
-                        dining();
-                        gotoBoard(nCtx,lista,"DINING ROOM");
+
+
 
                         break;
                     case 4:
-                        KITCHEN();
-                        gotoBoard(nCtx,lista,"KITCHEN");
+
+
 
                         break;
                     case 5:
-                        ADVERBSOFTIME();
-                        gotoBoard(nCtx,lista,"ADVERBSOFTIME");
+
+
 
                         break;
                     case 6:
-                        CLOTHES();
-                        gotoBoard(nCtx,lista,"CLOTHES");
+
+
                         break;
+                    case 7:
+
+
                     default:
                         Toast.makeText(nCtx, "Noppp", Toast.LENGTH_SHORT).show();
                 }
@@ -105,9 +103,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         });
     }
 
-    public void irregularVerbs() {
-        lista = new ArrayList<>();
+    public void irregularVerbs2() {
 
+        verbs = new ArrayList<>();
+        verbs.add(new Verbs("BE",    "SER/ESTAR/EXISTIR", "WAS/WERE"," BEEN", sounds[0], color[0],        coloText[0]));
+        verbs.add(new Verbs("BEAT",  "BATIR/RITMO/GOLPEAR", "BEAT","BEATEN", sounds[1], color[0],      coloText[0]));
+        verbs.add(new Verbs("BECOME","VOLVERSE/CONVERTIRSE", "BECAME","BECOME", sounds[2], color[0],     coloText[0]));
+        verbs.add(new Verbs("BEGIN", "EMPEZAR/COMENZAR", "BEGAN","BEGUN", sounds[3], color[0],         coloText[0]));
+        verbs.add(new Verbs("BEND",  "CURVA/DOBLAR", "BENT","BENT", sounds[4], color[0],             coloText[0]));
+        verbs.add(new Verbs("BET",   "APUESTA/APOSTAR", "BET","BET", sounds[5], color[0],          coloText[0]));
+
+        verbs.add(new Verbs("BITE",  "MORDEDURA/BOCADO", "BITE","BITTEN" ,sounds[6], color[1], coloText[1]));
+        verbs.add(new Verbs("BLOW",  "SOPLO/VOLAR/SOPLAR", "BLEW", "BLOWN",sounds[7], color[1], coloText[1]));
+        verbs.add(new Verbs("BREAK", "DESCANSO/ROMPER", "BROKE","BROKEN" ,sounds[0],color[1], coloText[1]));
+        verbs.add(new Verbs("BRING", "TRAER/LLEVAR/PROVOCAR", "BROUGHT", "BROUGHT",sounds[0], color[1], coloText[1]));
+        verbs.add(new Verbs("BUILD", "CONSTRUIR/EDIFICAR", "BUIL", "BUILT",sounds[0], color[1], coloText[1]));
+        verbs.add(new Verbs("BURST", "RAFAGA/EXPLOSION", "BURST", "BURST",sounds[0], color[1], coloText[1]));
+
+        verbs.add(new Verbs("BUY",   "COMPRAR/SOBORNAR", "BOUGHT", "BOUGHT",sounds[0], color[2], coloText[2]));
+        verbs.add(new Verbs("CATCH", "CAPTURA/COGER/ATRAPAR", "CAUGHT", "CAUGHT",sounds[0], color[2], coloText[2]));
+        verbs.add(new Verbs("CHOOSE","ESCOGER/ELEGIR", "CHOSE", "CHOSEN",sounds[0], color[2], coloText[2]));
+        verbs.add(new Verbs("COME",  "VEN/VENIR/LLEGAR", "CAME", "COME",sounds[0], color[2], coloText[2]));
+        verbs.add(new Verbs("COST",  "COSTO/COSTAR/PRECIO", "COST", "COST",sounds[0], color[2], coloText[2]));
+}
+    public void irregularVerbs() {
+
+        lista = new ArrayList<>();
         lista.add(new Board("BE",    "SER/ESTAR/EXISTIR", "I KNOW", sounds[0], color[0],        coloText[0]));
         lista.add(new Board("BEAT",  "BATIR/RITMO/GOLPEAR", "I KNOW", sounds[1], color[0],      coloText[0]));
         lista.add(new Board("BECOME","VOLVERSE/CONVERTIRSE", "I KNOW", sounds[2], color[0],     coloText[0]));
@@ -225,165 +246,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         lista.add(new Board("bathroom","baño", "I KNOW", sounds[0], color[0],     coloText[0]));
         lista.add(new Board("bedroom", "dormitorio", "I KNOW", sounds[0], color[0],         coloText[0]));
         lista.add(new Board("dining room",  "comedor", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("living room",   "salón", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("sitting room",  "sala de estar", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("garage",  "garaje", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("kitchen", "cocina", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("basement", "sótano", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("cellar", "bodega", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("attic", "ático", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("study",   "estudio", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("toilet",   "toilette", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("door", "puerta", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("doorbell","timbre", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("doormat",  "felpudo", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("letter box",  "buzón", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("window",   "ventana", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("roof",  "techo", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("chimney",   "chimenea", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("stairs",    "escalera", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("flat ",  "departamento", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("apartment ", "departamento", "I KNOW", sounds[0], color[3], coloText[3]));
-
     }
-    public void dining(){
-        lista = new ArrayList<>();
-        lista.add(new Board("dining room","comedor", "I KNOW", sounds[0], color[0],        coloText[0]));
-        lista.add(new Board("living room",  "salón", "I KNOW", sounds[0], color[0],      coloText[0]));
-        lista.add(new Board("table","mesa", "I KNOW", sounds[0], color[0],     coloText[0]));
-        lista.add(new Board("chair", "silla", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("armchair",  "sillón", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("sofa",   "sofá", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("floor",  "piso", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("ceiling",  "techo", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("rug", "alfombra", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("carpet", "alfombra fija", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("fireplace", "chimenea", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("radiator", "radiador", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("lamp",   "lámpara", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("light",   "luz", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("curtain", "cortina", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("wall","pared", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("wallpaper",  "papel de pared", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("television",  "televisor", "I KNOW", sounds[0], color[2], coloText[2]));
-
-    }
-    public void KITCHEN(){
-        lista = new ArrayList<>();
-        lista.add(new Board("kitchen","CONINA", "I KNOW", sounds[0], color[0],        coloText[0]));
-        lista.add(new Board("fridge",  "heladera", "I KNOW", sounds[0], color[0],      coloText[0]));
-        lista.add(new Board("oven","horno", "I KNOW", sounds[0], color[0],     coloText[0]));
-        lista.add(new Board("microwaveoven", "horno de microondas", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("dishwasher",  "lavavajillas", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("washingmachine","lavarropas", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("ironing board",  "tabla de planchar", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("toaster",  "tostadora", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("liquidizer", "licuadora", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("blender", "licuadora", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("mixer", "batidora", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("broom", "escoba", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("sink",   "LAVAMANOS", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("tap",   "GRIFO", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("waste bin", "cortina", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("worktop","MESADA", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("tea towel",  "paño, repasador", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("frying pan",  "sartén", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("saucepan","cacerola", "I KNOW", sounds[0], color[0],        coloText[0]));
-        lista.add(new Board("pressurecooker",  "olla a presión", "I KNOW", sounds[0], color[0],      coloText[0]));
-        lista.add(new Board("kettle","hervidor, pava", "I KNOW", sounds[0], color[0],     coloText[0]));
-        lista.add(new Board("bowl", "bol", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("tin opener", "abrelatas", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("corkscrew",  "sacacorchos", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("FORK","tenedor", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("knife", "cuchillo", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("spoon", "cuchara", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("teaspoon", "cucharita", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("cutlerydrawer", "cajón de los cubiertos", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("cup",   "taza", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("glass",   "vaso", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("saucer", "plato", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("jug","jarra", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("coffeepot",  "jarra para café", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("coffee maker",  "cafetera", "I KNOW", sounds[0], color[2], coloText[2]));
-
-    }
-    public void ADVERBSOFTIME(){
-        lista = new ArrayList<>();
-        lista.add(new Board("yesterday",            "ayer", "I KNOW", sounds[0], color[0],        coloText[0]));
-        lista.add(new Board("yesterday morning",    "ayer a la mañana", "I KNOW", sounds[0], color[0],      coloText[0]));
-        lista.add(new Board("yesterday at noon",    "ayer al mediodía", "I KNOW", sounds[0], color[0],     coloText[0]));
-        lista.add(new Board("yesterday afternoon",  "ayer a la tarde", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("yesterday evening",    "ayer a la noche", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("last night",           "anoche", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("today",                "hoy", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("this morning",         "esta mañana", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("at noon",              "al mediodía", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("this afternoon",       "esta tarde", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("this evening",         "esta noche", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("tonight",              "esta noche", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("tomorrow",             "mañana ", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("the day before yesterday",   "anteayer", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("the day after tomorrow", "pasado mañana", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("last week","la semana pasada", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("next week",  "la semana próxima", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("in two weeks' time",  "dentro de dos semanas", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("in two months' time","dentro de dos meses", "I KNOW", sounds[0], color[0],        coloText[0]));
-        lista.add(new Board("on Monday",  "el lunes ", "I KNOW", sounds[0], color[0],      coloText[0]));
-        lista.add(new Board("in January","en enero ", "I KNOW", sounds[0], color[0],     coloText[0]));
-        lista.add(new Board("every day", "todos los días", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("all day long", "todo el día", "I KNOW", sounds[0], color[0],         coloText[0]));
-        lista.add(new Board("now",  "ahora", "I KNOW", sounds[0], color[0],             coloText[0]));
-        lista.add(new Board("early","temprano", "I KNOW", sounds[0], color[0],          coloText[0]));
-        lista.add(new Board("late", "tarde", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("later / afterwards", "más tarde", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("recently", "recientemente", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("soon", "pronto", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("suddenly",   "de pront", "I KNOW", sounds[0], color[2], coloText[2]));
-
-    }
-    public void CLOTHES() {
-        lista = new ArrayList<>();
-        lista.add(new Board("Overcoat", "Abrigo de hombre", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Coat", "Abrigo de mujer", "I KNOW", sounds[1], color[0], coloText[0]));
-        lista.add(new Board("Fur coat", "Abrigo de pieles", "I KNOW", sounds[2], color[0], coloText[0]));
-        lista.add(new Board("Bathrobe", "Albornoz", "I KNOW", sounds[3], color[0], coloText[0]));
-        lista.add(new Board("Jacket", "Chaqueta", "I KNOW", sounds[4], color[0], coloText[0]));
-        lista.add(new Board("Bikini", "Bikini", "I KNOW", sounds[5], color[0], coloText[0]));
-        lista.add(new Board("Boot", "Bota", "I KNOW", sounds[6], color[1], coloText[1]));
-        lista.add(new Board("Knickers/Panties", "Bragas", "I KNOW", sounds[7], color[1], coloText[1]));
-        lista.add(new Board("Socks", "Calcetines", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("Shoe", "Zapato", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("Shorts", "Calzoncillos", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("Shirt", "Camisa", "I KNOW", sounds[0], color[1], coloText[1]));
-        lista.add(new Board("T-shirt", "Camiseta", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("Nightdress", "Camisón de mujer", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("Cape/Cloak", "Capa", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("Jerkin", "Cazadora", "I KNOW", sounds[0], color[2], coloText[2]));
-
-        lista.add(new Board("Vest", "Chaleco", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("Track suit", "Chándal", "I KNOW", sounds[0], color[2], coloText[2]));
-        lista.add(new Board("Tie", "Corbata", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Skirt", "Falda", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Raincoat", "Gabardina", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Cap", "Gorro", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Sweater/Jumper", "Jersey", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Pants", "Pantalón", "I KNOW", sounds[0], color[3], coloText[3]));
-        lista.add(new Board("Jeans", "Pantalón vaquero", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Short trousers", "Pantalones cortos", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Pyjamas", "Pijama", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Clothing", "Ropa", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Dinner jacket", "Smoking", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Hat", "Sombrero", "I KNOW", sounds[0], color[4], coloText[4]));
-        lista.add(new Board("Brassiere/Bra", "Sostén,sujetador", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Bathing suit", "Traje de baño", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Suit", "PTraje de hombre", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Evening/Formal dress", "Traje de etiqueta", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Dress", "OBTENER/CONSEGUIR", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("Wardrobe", "Vestuario", "I KNOW", sounds[0], color[0], coloText[0]));
-        lista.add(new Board("shoes", "zapatos", "I KNOW", sounds[0], color[1], coloText[1]));
-         }
-
-
 
     public void gotoBoard(Context ctx,List<Board> lista,String titulo ){
         Intent intent = new Intent(ctx,BoardActivity.class);
@@ -397,11 +260,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
     public int getItemCount() {
         return categoryList.size();
     }
-
-
-
-    
-
 
 
 }

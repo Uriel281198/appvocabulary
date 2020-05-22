@@ -13,7 +13,7 @@ import static sooyer.developer.com.palabrasandwords.Local.WordDatabase.DATABASE_
 
 public abstract class WordDatabase extends RoomDatabase{
 
-    public  static final int DATABASE_VERSION = 1;
+    public  static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME ="ENGLISH";
 
     public  abstract WordDao WordDAO();

@@ -46,6 +46,7 @@ public class WordAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mcontext, R.layout.layout_item_word,null);
         TextView lwpalabra = v.findViewById(R.id.lWPalabra);
+
         TextView lwtrad = v.findViewById(R.id.lWTraduccion);
         if (Common.istrue!=false){
             lwtrad.setText(mWordList.get(position).getTraslate());
@@ -56,7 +57,7 @@ public class WordAdapter extends BaseAdapter {
         TextView lweje = v.findViewById(R.id.lWEjemplo);
         ImageView backround = v.findViewById(R.id.imageView3);
         backround.setImageDrawable(mcontext.getResources().getDrawable(mWordList.get(position).getColor()));
-        lwpalabra.setText(mWordList.get(position).getWord());
+        lwpalabra.setText(mWordList.get(position).getWord().toUpperCase());
         lwpalabra.setTextColor(mcontext.getResources().getColor(mWordList.get(position).getTextcolor()));
 
 

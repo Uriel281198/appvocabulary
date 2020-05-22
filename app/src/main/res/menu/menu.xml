@@ -13,7 +13,7 @@
     <item
         app:showAsAction="ifRoom"
         android:id="@+id/show"
-        android:icon="@drawable/mas"
+        android:icon="@drawable/view"
         android:title="Show"
     />
 

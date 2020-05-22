@@ -47,19 +47,19 @@ public class CategoryFragment extends Fragment {
     }
 
     public void full_list(){
-        categoryAdapterList.add( new Category("My Words",R.drawable.lista, 2,R.drawable.gradientcrojo,R.color.colorRojo));
-        categoryAdapterList.add( new Category ("Irregular verbs",R.drawable.irre,101,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category ("My Words",R.drawable.irre,0,R.drawable.gradientcazul,R.color.colorAzul));
+        categoryAdapterList.add( new Category("Irregular Verbs",R.drawable.lista, 102,R.drawable.gradientcrojo,R.color.colorRojo));
         categoryAdapterList.add( new Category ("Home",R.drawable.home,24,R.drawable.gradientcmorado,R.color.colorMorado));
         categoryAdapterList.add( new Category ("Dining Room",R.drawable.dinning,18,R.drawable.gradientcverde,R.color.colorVerde));
         categoryAdapterList.add( new Category ("Kitchen",R.drawable.kitchen,35,R.drawable.gradientcrojo,R.color.colorRojo));
         categoryAdapterList.add( new Category ("ADVERBSOFTIME",R.drawable.time,30,R.drawable.gradientcazul,R.color.colorAzul));
         categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
-        categoryAdapterList.add( new Category ("CLOTHES",R.drawable.t_shirt,40,R.drawable.gradientcgris,R.color.colorGris));
+
+
+
+
+
+
     }
 
 

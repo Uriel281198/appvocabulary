@@ -30,13 +30,10 @@ import sooyer.developer.com.palabrasandwords.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -45,46 +42,5 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         },1000);
-    }
-
-
-
-
-    private void loadAllTemas(){
-        String jsonSTR = loadJson("temas.json");
-        try {
-            JSONObject jsonObject = new JSONObject(jsonSTR);
-            JSONArray jsonArray = jsonObject.getJSONArray("temas");
-        }catch (JSONException e){
-            e.printStackTrace();
-
-        }
-    }
-
-    private String loadJson(String file){
-        String json = "";
-        try {
-            InputStream is = getAssets().open(file);
-            int size = is.available();
-            byte [] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer,"UTF-8");
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-
-
-
-    public void showToas(){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_error_layout,(ViewGroup) findViewById(R.id.toast_root));
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
     }
 }

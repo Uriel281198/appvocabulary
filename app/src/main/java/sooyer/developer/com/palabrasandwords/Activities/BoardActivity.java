@@ -4,28 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import sooyer.developer.com.palabrasandwords.Adapters.BoardAdapter;
 import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
-import sooyer.developer.com.palabrasandwords.Util.MySpanSizeLookup;
+
+import static sooyer.developer.com.palabrasandwords.Common.Common.showTraslate;
 
 public class BoardActivity extends AppCompatActivity  implements android.support.v7.widget.SearchView.OnQueryTextListener {
     RecyclerView recyclerView;
     ArrayList<Board> boardAdapterList ;
     BoardAdapter adapter;
 
-    private GridLayoutManager gridLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,6 @@ public class BoardActivity extends AppCompatActivity  implements android.support
             }
         }
         adapter.filterList(filter);
-
     }
 
 
@@ -78,15 +78,35 @@ public class BoardActivity extends AppCompatActivity  implements android.support
         searchView.setOnQueryTextListener(this);
 
         MenuItem hidden = menu.findItem(R.id.action_hidden);
-
         hidden.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(BoardActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+
+                if (showTraslate != false){
+                    showTraslate = false;
+
+                    adapter.notifyDataSetChanged();
+                }else if (showTraslate !=true){
+
+                    showTraslate = true;
+                    adapter.notifyDataSetChanged();
+                }
                 return true;
             }
         });
-
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_hidden:
+                Toast.makeText(this, "Hola", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -28,6 +28,7 @@ import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
 
 import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
+import static sooyer.developer.com.palabrasandwords.Common.Common.showTraslate;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
     private Context nCtx;
@@ -57,8 +58,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
         holder.name.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
         holder.name.setText(board.getPalabra().toUpperCase());
 
-
+        if (showTraslate != false){
             holder.traduccion.setText(board.getTraduccion().toUpperCase());
+
+        }else{
+            holder.traduccion.setVisibility(View.GONE);
+            holder.name.setTextSize(24);
+
+        }
 
         holder.fondo.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 

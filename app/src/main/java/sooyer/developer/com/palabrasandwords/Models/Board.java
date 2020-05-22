@@ -11,6 +11,7 @@ public class Board implements Serializable
     private String palabra;
     private String traduccion;
     private String ejemplo;
+
     private int audio;
     private int color;
     private int colortexto;

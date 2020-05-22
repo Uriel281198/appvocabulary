@@ -52,8 +52,6 @@ import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
 import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
-
-
 public class Word_Activity extends AppCompatActivity {
 
     //List y adapters
@@ -125,6 +123,8 @@ public class Word_Activity extends AppCompatActivity {
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
                 btnmorado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -135,9 +135,6 @@ public class Word_Activity extends AppCompatActivity {
                             btnverde.setBackgroundResource(R.drawable.shape_green);
                             color =R.drawable.gradientcmorado;
                             colorTexto = R.color.colorMorado;
-
-
-
                     }
                 });
                 btngris.setOnClickListener(new View.OnClickListener() {
@@ -200,39 +197,41 @@ public class Word_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (TextUtils.isEmpty(txtpalabra.getText()))
+                        if (TextUtils.isEmpty(txtpalabra.getText())){
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                                    Word word = new Word(txtpalabra .getText().toString(),txttraduccion.getText().toString(),color,colorTexto);
+                                    wordList.add(word);
+                                    wordRepository.insertWord(word);
+                                    e.onComplete();
+                                }
+                            })
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe(new Consumer<Object>() {
 
-                        Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
-                            @Override
-                            public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(),color,colorTexto);
-                                wordList.add(word);
-                                wordRepository.insertWord(word);
-                                e.onComplete();
-                            }
-                        })
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(new Consumer<Object>() {
+                                        @Override
+                                        public void accept(Object o) throws Exception {
+                                            Toast.makeText(Word_Activity.this, "Sucecfully", Toast.LENGTH_SHORT).show();
+                                            Log.e("lolllll",""+wordList.toString());
+                                        }
+                                    },new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            Toast.makeText(Word_Activity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }, new Action() {
+                                        @Override
+                                        public void run() throws Exception {
+                                            loadData();
+                                        }
+                                    });
+                            dialog.dismiss();
+                        }
 
-                                    @Override
-                                    public void accept(Object o) throws Exception {
-                                        Toast.makeText(Word_Activity.this, "Sucecfully", Toast.LENGTH_SHORT).show();
-                                        Log.e("lolllll",""+wordList.toString());
-                                    }
-                                },new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
-                                        Toast.makeText(Word_Activity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }, new Action() {
-                                    @Override
-                                    public void run() throws Exception {
-                                        loadData();
-                                    }
-                                });
-                        dialog.dismiss();
                     }
                 });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -319,7 +318,6 @@ public class Word_Activity extends AppCompatActivity {
                 deleteallUser();
             break;
             case R.id.show:
-                Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show();
                 if (istrue != false){
                     istrue = false;
 

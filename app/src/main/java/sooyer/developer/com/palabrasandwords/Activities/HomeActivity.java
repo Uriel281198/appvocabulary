@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Space;
 import android.widget.Toast;
 
 import com.luseen.spacenavigation.SpaceItem;
@@ -19,94 +23,97 @@ import java.util.ArrayList;
 import java.util.List;
 import sooyer.developer.com.palabrasandwords.Adapters.CategoryAdapter;
 import sooyer.developer.com.palabrasandwords.Fragments.CategoryFragment;
+import sooyer.developer.com.palabrasandwords.Fragments.ConfiguracionFragment;
 import sooyer.developer.com.palabrasandwords.Fragments.ModuleFragment;
 import sooyer.developer.com.palabrasandwords.Models.Category;
 import sooyer.developer.com.palabrasandwords.R;
 
 public class HomeActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    ArrayList<Category> categoryAdapterList ;
-    SpaceNavigationView navigationView;
+    //BootomNavigation
+    private SpaceNavigationView spaceNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        changeTheme();
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
-        setToolbar("Vocabulario and Vocabary",false);
+        setToolbar("Vocabulary",false);
 
-        navigationView = findViewById(R.id.space);
-        SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
+        spaceNavigationView =  findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
-        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.famyly));
-        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.famyly));
-
+        spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.home));
+        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.home));
         spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
-            Fragment selectfragment  =  null;
             @Override
             public void onCentreButtonClick() {
-                Toast.makeText(HomeActivity.this,"onCentreButtonClick", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(HomeActivity.this, Word_Activity.class));
-                navigationView.setCentreButtonSelectable(true);
+                Intent i = new Intent(HomeActivity.this,Word_Activity.class);
+                startActivity(i);
             }
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
+                Fragment selectfragment  =  null;
                 switch (itemIndex){
                     case 0:
                         selectfragment = new CategoryFragment();
-                        Toast.makeText(HomeActivity.this, "Hola0 ", Toast.LENGTH_SHORT).show();
-                        break;
+                    break;
                     case 1:
                         selectfragment  = new ModuleFragment();
-                        Toast.makeText(HomeActivity.this, "Hola1 ", Toast.LENGTH_SHORT).show();
-                        break;
-
+                     break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
+                return ;
             }
-
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                Toast.makeText(HomeActivity.this, itemIndex + " " + itemName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Selected", Toast.LENGTH_SHORT).show();
             }
         });
-
-         /* BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-          bottomNavigationView.setOnNavigationItemSelectedListener(navlistener);
-*/
-
-          getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CategoryFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CategoryFragment()).commit();
     }
-/*
-    private BottomNavigationView.OnNavigationItemSelectedListener navlistener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectfragment  =  null;
 
-                    switch (item.getItemId()){
-                        case R.id.navigation_home:
-                            selectfragment = new CategoryFragment();
-                            break;
-                        case R.id.navigation_dashboard:
-                            selectfragment  = new ModuleFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
+    //Menu Create and Select
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.icon_Config:
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ConfiguracionFragment()).commit();
+                return  true;
+            default:
+                return super.onOptionsItemSelected(item);
+            }
+    }
 
-                    return true;
-                }
-            };
-
-*/
     public void setToolbar(String name,Boolean up){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
+    public void changeTheme(){
+        Bundle datos = this.getIntent().getExtras();
+        if (datos == null){
+            Toast.makeText(this, "No  hay datos", Toast.LENGTH_SHORT).show();
+        }else {
+            if (datos.getInt("color") == 1) {
+                Toast.makeText(this, "Si hay", Toast.LENGTH_SHORT).show();
 
+                setTheme(R.style.RedThme);
+            }else if(datos.getInt("color") == 2){
+                setTheme(R.style.AppTheme);
+            }
+        }
+    }
 }
+
 
 /*
 <android.support.design.widget.BottomNavigationView

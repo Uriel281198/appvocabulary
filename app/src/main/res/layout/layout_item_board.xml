@@ -28,7 +28,7 @@
             >
             <TextView
                 android:id="@+id/name_board"
-                android:layout_margin="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

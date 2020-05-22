@@ -2,10 +2,6 @@ package sooyer.developer.com.palabrasandwords.Util;
 
 import android.support.v7.widget.GridLayoutManager;
 
-/**
- * Created by Uriel on 24/07/2019.
- */
-
 public class MySpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
     int spanPos, spanCnt1, spanCnt2;
 

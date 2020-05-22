@@ -16,10 +16,8 @@ public class Word  {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
-
     @ColumnInfo(name = "word")
     private String word;
-
     @ColumnInfo(name = "traslate")
     private String traslate;
 
