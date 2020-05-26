@@ -5,7 +5,7 @@
     <item
         android:title="hidden"
         android:id="@+id/action_hidden"
-        android:icon="@drawable/view"
+        android:icon="@drawable/ic_remove_red_eye_black_24dp"
         app:showAsAction="ifRoom|collapseActionView"
         ></item>
 

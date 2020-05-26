@@ -26,8 +26,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
     private List<Category> categoryList;
     
     int sounds[ ]= {
-            R.raw.be,R.raw.beat,R.raw.become,R.raw.begin,R.raw.bend,
-            R.raw.bet,R.raw.bite,R.raw.breakk,R.raw.bring,R.raw.bring,R.raw.build
+            R.raw.be,R.raw.beat,R.raw.become,R.raw.begin,R.raw.bend,R.raw.bet,R.raw.bite,R.raw.blow
     };
     int color[] = {R.drawable.gradienterojo_opaco,R.drawable.gradientazul_opaco,R.drawable.gradientgris_opaco,R.drawable.gradienteverde_opaco,R.drawable.gradientcgris};
     int coloText[] ={R.color.colorRosaOpaco,R.color.colorAzulOpaco,R.color.colorMoradoOpaco,R.color.colorVerdeOpaco,R.color.colorAZpaco};
@@ -36,6 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
     List<Board> lista;
     List<Verbs> verbs;
+
     public CategoryAdapter(Context nCtx, List<Category> categoryList) {
         this.nCtx = nCtx;
         this.categoryList = categoryList;
@@ -138,7 +138,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
         lista.add(new Board("BITE",  "MORDEDURA/BOCADO", "I KNOW", sounds[6], color[1], coloText[1]));
         lista.add(new Board("BLOW",  "SOPLO/VOLAR/SOPLAR", "I KNOW", sounds[7], color[1], coloText[1]));
-        lista.add(new Board("BREAK", "DESCANSO/ROMPER", "I KNOW", sounds[0], color[1], coloText[1]));
+      /*  lista.add(new Board("BREAK", "DESCANSO/ROMPER", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BRING", "TRAER/LLEVAR/PROVOCAR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BUILD", "CONSTRUIR/EDIFICAR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("BURST", "RAFAGA/EXPLOSION", "I KNOW", sounds[0], color[1], coloText[1]));
@@ -238,7 +238,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
         lista.add(new Board("WEAR", "USAR/PONSERSE/VESTIR", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("WIN", "GANAR/ALCANZAR/VENCER", "I KNOW", sounds[0], color[1], coloText[1]));
         lista.add(new Board("WRITE", "ESCRIBIR/COMPONER", "I KNOW", sounds[0], color[1], coloText[1]));
-    }
+    */}
     public void Home(){
         lista = new ArrayList<>();
         lista.add(new Board("room",    "habitación", "I KNOW", sounds[0], color[0],        coloText[0]));

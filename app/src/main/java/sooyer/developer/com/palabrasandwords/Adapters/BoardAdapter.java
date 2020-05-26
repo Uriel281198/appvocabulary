@@ -9,11 +9,13 @@ import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +37,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     private List<Board> BoardList;
     private List<Board> BoardListFull;
     SoundPool sp;
-    int audio [ ] = {R.raw.sound,R.raw.sound_short};
+    int audio [ ] = {};
     int sonido;
     ItemClickListener itemClickListener;
     public View mView;
@@ -58,12 +60,24 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
         holder.name.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
         holder.name.setText(board.getPalabra().toUpperCase());
 
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = 60;
         if (showTraslate != false){
-            holder.traduccion.setText(board.getTraduccion().toUpperCase());
-
+            //holder.traduccion.setGravity(Gravity.CENTER);
+            holder.traduccion.setText(board.getTraduccion().toLowerCase());
+            holder.traduccion.setVisibility(View.VISIBLE);
+            holder.name.setTextSize(20);
+            int hd = (int) holder.name.getTextSize();
         }else{
             holder.traduccion.setVisibility(View.GONE);
             holder.name.setTextSize(24);
+           /* LinearLayout.LayoutParams lp = new
+                    LinearLayout.LayoutParams(width,height);
+            lp.setMargins(0,0,50,0);
+
+            holder.name.setLayoutParams(lp);
+            //holder.name.setGravity(Gravity.CENTER);
+*/
 
         }
 
@@ -74,12 +88,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
             @Override
             public void onClick(View view, int position) {
 
-                if (position == 0){
 
-                   // Intent go_detail = new Intent(nCtx, TestActivity.class);
-                    //nCtx.startActivity(go_detail);
-
-                }else{
                     AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
                     View vista = inflater.inflate(R.layout.dialog_board,null);
                     mbuilder.setView(vista);
@@ -116,7 +125,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                     });
 
 
-                }
+
 
 
 /*
