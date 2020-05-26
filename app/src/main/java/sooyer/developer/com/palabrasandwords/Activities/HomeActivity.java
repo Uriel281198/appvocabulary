@@ -113,17 +113,3 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 }
-
-
-/*
-<android.support.design.widget.BottomNavigationView
-        android:layout_above="@+id/space"
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemIconTint="@color/colorWhite"
-        app:itemTextColor="@color/colorWhite"
-        android:background="@color/colorPrimary"
-        app:menu="@menu/menu_bottom" />
-*/
