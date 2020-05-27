@@ -1,10 +1,12 @@
 package sooyer.developer.com.palabrasandwords.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-
+import android.widget.Toast;
 import sooyer.developer.com.palabrasandwords.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,5 +23,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         },1000);
+
+        
     }
+
 }

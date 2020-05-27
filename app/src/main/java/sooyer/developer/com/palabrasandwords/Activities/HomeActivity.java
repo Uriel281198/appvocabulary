@@ -1,5 +1,7 @@
 package sooyer.developer.com.palabrasandwords.Activities;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -28,19 +30,20 @@ import sooyer.developer.com.palabrasandwords.Fragments.ModuleFragment;
 import sooyer.developer.com.palabrasandwords.Models.Category;
 import sooyer.developer.com.palabrasandwords.R;
 
+import static sooyer.developer.com.palabrasandwords.Common.Common.changeThemeGlobal;
+import static sooyer.developer.com.palabrasandwords.Common.Common.colorTheme;
+
 public class HomeActivity extends AppCompatActivity {
     //BootomNavigation
     private SpaceNavigationView spaceNavigationView;
-
+    Fragment selectfragment  =  null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        changeTheme();
+        colorTheme = loadDataPreferens();
+        changeThemeGlobal(this);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_home);
         setToolbar("Vocabulary",false);
-
         spaceNavigationView =  findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.home));
@@ -54,13 +57,16 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                Fragment selectfragment  =  null;
+
                 switch (itemIndex){
                     case 0:
+                        Toast.makeText(HomeActivity.this, "Im here ", Toast.LENGTH_SHORT).show();
                         selectfragment = new CategoryFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
                     break;
                     case 1:
                         selectfragment  = new ModuleFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
                      break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
@@ -68,7 +74,18 @@ public class HomeActivity extends AppCompatActivity {
             }
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                Toast.makeText(HomeActivity.this, "Selected", Toast.LENGTH_SHORT).show();
+                switch (itemIndex){
+                    case 0:
+                        Toast.makeText(HomeActivity.this, "Im here ", Toast.LENGTH_SHORT).show();
+                        selectfragment = new CategoryFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
+                        break;
+                    case 1:
+                        selectfragment  = new ModuleFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
             }
         });
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CategoryFragment()).commit();
@@ -85,7 +102,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.icon_Config:
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ConfiguracionFragment()).commit();
+                selectfragment =  new ConfiguracionFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,selectfragment).commit();
                 return  true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -99,17 +117,19 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
     public void changeTheme(){
-        Bundle datos = this.getIntent().getExtras();
-        if (datos == null){
-            Toast.makeText(this, "No  hay datos", Toast.LENGTH_SHORT).show();
-        }else {
-            if (datos.getInt("color") == 1) {
-                Toast.makeText(this, "Si hay", Toast.LENGTH_SHORT).show();
-
-                setTheme(R.style.RedThme);
-            }else if(datos.getInt("color") == 2){
-                setTheme(R.style.AppTheme);
-            }
+        if (colorTheme == 1){
+            Toast.makeText(this, "Si hay", Toast.LENGTH_SHORT).show();
+            setTheme(R.style.RedThme);
+        }else if(colorTheme == 2){
+            setTheme(R.style.AppTheme);
         }
+    }
+
+    public  int  loadDataPreferens(){
+        SharedPreferences sharedPreferences = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        int nuevoColor = sharedPreferences .getInt("color_selected",0);
+        Toast.makeText(this, ""+nuevoColor, Toast.LENGTH_SHORT).show();
+        return nuevoColor;
+
     }
 }

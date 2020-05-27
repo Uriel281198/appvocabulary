@@ -12,7 +12,8 @@
     </include>
 
     <ListView
-        android:layout_margin="5dp"
+
+        android:layout_margin="20dp"
         android:layout_below="@+id/nose"
         android:id="@+id/lsWord"
         android:layout_width="match_parent"

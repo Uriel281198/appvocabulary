@@ -20,6 +20,8 @@ import sooyer.developer.com.palabrasandwords.Adapters.BoardAdapter;
 import sooyer.developer.com.palabrasandwords.Models.Board;
 import sooyer.developer.com.palabrasandwords.R;
 
+import static sooyer.developer.com.palabrasandwords.Common.Common.changeThemeGlobal;
+import static sooyer.developer.com.palabrasandwords.Common.Common.colorTheme;
 import static sooyer.developer.com.palabrasandwords.Common.Common.showTraslate;
 
 public class BoardActivity extends AppCompatActivity  implements android.support.v7.widget.SearchView.OnQueryTextListener {
@@ -29,6 +31,7 @@ public class BoardActivity extends AppCompatActivity  implements android.support
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        changeThemeGlobal(this);
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();

@@ -51,7 +51,10 @@ import sooyer.developer.com.palabrasandwords.Local.WordDatabase;
 import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
+import static sooyer.developer.com.palabrasandwords.Common.Common.changeThemeGlobal;
 import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
+
+
 public class Word_Activity extends AppCompatActivity {
 
     //List y adapters
@@ -78,12 +81,15 @@ public class Word_Activity extends AppCompatActivity {
     private Button btnazul;
 
     private int indice = 0;
-    int color =       R.drawable.gradientcazul;
+    int color =       R.drawable.gradientazul_opaco;
     int colorTexto =  R.color.colorAzul;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+       changeThemeGlobal(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_);
         setToolbar("MY WORDS",true);
@@ -181,7 +187,7 @@ public class Word_Activity extends AppCompatActivity {
                 btnazul.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        color =R.drawable.gradientcazul;
+                        color =R.drawable.gradientazul_opaco;
                         colorTexto = R.color.colorAzul;
                         btnmorado.setBackgroundResource(R.drawable.shape_color);
                         btngris.setBackgroundResource(R.drawable.shape_gris);

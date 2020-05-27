@@ -1,76 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+
     >
 
-    <ImageView
-        android:id="@+id/dialog_back"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradienterojo_opaco"
-        />
-
-    <android.support.v7.widget.CardView
-
-        android:id="@+id/card"
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/gradientcazul"
+        android:layout_height="500dp"
         >
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <TextView
-               android:text="This  Word"
-               android:textColor="@color/colorRosaOpaco"
-               android:hint="Palabra"
-               android:layout_marginTop="50dp"
-               android:id="@+id/txtpalabra_board"
-               android:layout_centerHorizontal="true"
-               android:textStyle="bold"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textSize="30sp"
-               />
-           <TextView
-               android:id="@+id/txttraduccion_board"
-               android:layout_marginTop="10dp"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/dialog_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradienterojo_opaco"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
 
-               android:textSize="20sp"
-               android:layout_centerHorizontal="true"
-               android:hint="Traduccion "
-               android:layout_below="@id/txtpalabra_board"/>
+        <android.support.v7.widget.CardView
 
-       </RelativeLayout>
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/gradientcazul"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.v7.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtpalabra_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="49dp"
+                    android:layout_marginEnd="79dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:hint="Palabra"
+                    android:text="This  Word"
+                    android:textColor="@color/colorRosaOpaco"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txttraduccion_board"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtpalabra_board"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:hint="Traduccion "
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btn_sound"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginBottom="17dp"
+                    android:background="@drawable/volume">
+
+                </Button>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
 
-    <TextView
-        android:id="@+id/txtejemplo_board"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-       />
+        <TextView
+            android:id="@+id/txtejemplo_board"
+            android:layout_width="wrap_content"
 
-    <Button
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="48dp"
+            android:text="sadsadas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
 
-        android:id="@+id/btn_sound"
-        android:background="@drawable/close"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/card"
-        android:layout_marginRight="80sp"
-        android:layout_marginTop="81dp" />
+        <TextView
+            android:id="@+id/txtejemplo_board2"
+            android:layout_width="wrap_content"
 
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="24dp"
+            android:text="sadsadas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/txtejemplo_board" />
 
+        <TextView
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="48dp"
+            android:text="SIMPLE PAST"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:text="PAST PARTICIPLE"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/close_alert"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/card"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtsimplepast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.381"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/txtejemplo_board2" />
+
+        <TextView
+            android:id="@+id/txtsimplepast2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.389"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/txtsimplepast" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

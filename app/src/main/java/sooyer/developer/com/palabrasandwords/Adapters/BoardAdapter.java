@@ -89,19 +89,30 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
             public void onClick(View view, int position) {
 
 
-                    AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
+                    final AlertDialog.Builder mbuilder = new AlertDialog.Builder(nCtx);
                     View vista = inflater.inflate(R.layout.dialog_board,null);
                     mbuilder.setView(vista);
                     final AlertDialog dialog = mbuilder.create();
                     dialog.show();
+
                     TextView txtp =  vista.findViewById(R.id.txtpalabra_board);
                     TextView txtt =  vista.findViewById(R.id.txttraduccion_board);
                     TextView txte =  vista.findViewById(R.id.txtejemplo_board);
+                    TextView txte2 =  vista.findViewById(R.id.txtejemplo_board2);
+                    TextView txtpastap2 =  vista.findViewById(R.id.txtsimplepast2);
+                    TextView txtpastpa =  vista.findViewById(R.id.txtsimplepast);
                     ImageView img = vista.findViewById(R.id.dialog_back);
-
                     Button btn = vista.findViewById(R.id.btn_sound);
+                    Button btnCloseAlert = vista.findViewById(R.id.close_alert);
+                    txtpastpa.setText(board.getPastParticple().toUpperCase());
+                    txtpastpa.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
+                    txte.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
+                    txte2.setText(board.getSimplePastP());
+                    txtpastap2.setText(board.getPastParticpleP());
+                    txte2.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
+                    txtpastap2.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
                     txtp.setText(board.getPalabra().toUpperCase());
-                    txte.setText(board.getPastParticple());
+                    txte.setText(board.getSimplePast().toUpperCase());
                     txtp.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
                     txtt.setText(board.getTraduccion().toUpperCase());
 
@@ -122,7 +133,15 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(nCtx, "gig", Toast.LENGTH_SHORT).show();
-                            sp.play(sonido,1,1,1,0,1);
+                            sp.play(sonido,1,1,2,0,1);
+
+                        }
+                    });
+
+                    btnCloseAlert.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
                         }
                     });
 
