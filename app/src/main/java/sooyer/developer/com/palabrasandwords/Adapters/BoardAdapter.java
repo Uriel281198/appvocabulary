@@ -98,11 +98,13 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                     TextView txtt =  vista.findViewById(R.id.txttraduccion_board);
                     TextView txte =  vista.findViewById(R.id.txtejemplo_board);
                     ImageView img = vista.findViewById(R.id.dialog_back);
+
                     Button btn = vista.findViewById(R.id.btn_sound);
                     txtp.setText(board.getPalabra().toUpperCase());
+                    txte.setText(board.getPastParticple());
                     txtp.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
                     txtt.setText(board.getTraduccion().toUpperCase());
-                    txte.setText(board.getEjemplo());
+
                     img.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 
                     AudioAttributes audioAttributes = new AudioAttributes.Builder()

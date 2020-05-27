@@ -18,6 +18,8 @@ import sooyer.developer.com.palabrasandwords.Models.Category;
 import sooyer.developer.com.palabrasandwords.Models.Verbs;
 import sooyer.developer.com.palabrasandwords.R;
 import sooyer.developer.com.palabrasandwords.ViewHolders.CategoryViewHolder;
+
+import static sooyer.developer.com.palabrasandwords.Resources.Resources.getIrregular;
 import static sooyer.developer.com.palabrasandwords.Resources.Resources.soundsGlobal;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
@@ -76,117 +78,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
     public void irregularVerbs() {
 
-        lista = new ArrayList<>();
-        lista.add(new Board("BE",    "SER/ESTAR/EXISTIR", "I KNOW", soundsGlobal[0], color[0],        coloText[0]));
-        lista.add(new Board("BEAT",  "BATIR/RITMO/GOLPEAR", "I KNOW", soundsGlobal[1], color[0],      coloText[0]));
-        lista.add(new Board("BECOME","VOLVERSE/CONVERTIRSE", "I KNOW", soundsGlobal[2], color[0],     coloText[0]));
-        lista.add(new Board("BEGIN", "EMPEZAR/COMENZAR", "I KNOW", soundsGlobal[3], color[0],         coloText[0]));
-        lista.add(new Board("BEND",  "CURVA/DOBLAR", "I KNOW", soundsGlobal[4], color[0],             coloText[0]));
-        lista.add(new Board("BET",   "APUESTA/APOSTAR", "I KNOW", soundsGlobal[5], color[0],          coloText[0]));
+        lista = getIrregular();
 
-        lista.add(new Board("BITE",  "MORDEDURA/BOCADO", "I KNOW", soundsGlobal[6], color[1], coloText[1]));
-        lista.add(new Board("BLOW",  "SOPLO/VOLAR/SOPLAR", "I KNOW", soundsGlobal[7], color[1], coloText[1]));
-        lista.add(new Board("BREAK", "DESCANSO/ROMPER", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("BRING", "TRAER/LLEVAR/PROVOCAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("BUILD", "CONSTRUIR/EDIFICAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("BURST", "RAFAGA/EXPLOSION", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
 
-        lista.add(new Board("BUY",   "COMPRAR/SOBORNAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("CAN",   "PODER/SABER", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("CATCH", "CAPTURA/COGER/ATRAPAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("CHOOSE","ESCOGER/ELEGIR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("COME",  "VEN/VENIR/LLEGAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("COST",  "COSTO/COSTAR/PRECIO", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
 
-        lista.add(new Board("CUT",   "CORTAR/REDUCIR/RECORTAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("DEAL",  "ACUERDO/NEGOCIAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("DIG",   "CAVAR/EXCAVAR/REMOVER", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("DO",    "HACER/REALIZAR/ACTUAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("DRAW",  "DIBUJAR/SACAR/TRAZAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("DRINK", "DRINK/TOMAR/EMPINAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-
-        lista.add(new Board("EAT",   "COMER/CONSUMIR/DEVORAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("FALL",  "CAER/BAJAR/OTOÑO", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("FEED",  "ALIMENTAR/DAR DE COMER", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("FEEL",  "SENTIR/SENSACION/PALPAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("FIGHT", "LUCHAR/COMBATIR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("FIND",  "ENCONTRAR/HALLAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-
-        lista.add(new Board("FLY",   "VOLAR/HUIR/PILOTEAR", "I KNOW", soundsGlobal[0], color[0],  coloText[0]));
-        lista.add(new Board("FORGET","OLVIDAR/DEJAR", "I KNOW", soundsGlobal[0], color[0],        coloText[0]));
-        lista.add(new Board("FORGIVE","PERDONAR/DISCULPAR", "I KNOW", soundsGlobal[0], color[0],  coloText[0]));
-        lista.add(new Board("FREEZE","CONGELAR/CONGELARSE", "I KNOW", soundsGlobal[0], color[0],  coloText[0]));
-        lista.add(new Board("GET",   "OBTENER/CONSEGUIR", "I KNOW", soundsGlobal[0], color[0],    coloText[0]));
-        lista.add(new Board("IS TIME OF TEST",  "GO TO TEST", "I KNOW", soundsGlobal[6], color[0], coloText[0]));
-        lista.add(new Board("GIVE",  "DAR/OFRECER/PRESTAR", "I KNOW", soundsGlobal[0], color[0],  coloText[0]));
-        lista.add(new Board("GO",    "IR/PASAR/SALIR", "I KNOW", soundsGlobal[0], color[1],       coloText[1]));
-        lista.add(new Board("GROW",  "CRECER/CULTIVAR/CRIAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("HANG",  "COLGAR/MANIR", "", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("HAVE",  "TENER/HABER/POSEER", "I KNOW", soundsGlobal[0], color[1],    coloText[1]));
-        lista.add(new Board("HEAR",  "OIR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-
-        lista.add(new Board("HIDE",  "ESCONDER/DISIMULAR", "I KNOW", soundsGlobal[0], color[1],   coloText[1]));
-        lista.add(new Board("HIT",   "GOLPEAR/GOLPE/IMPACTO", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("HOLD",  "SONTENER/MANTENER", "I KNOW", soundsGlobal[0], color[2],        coloText[2]));
-        lista.add(new Board("HURT",  "HERIR/DAÑO/LASTIMAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("KEEP",  "MANTENER/TENER/GUARDAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("KNOW",  "SABER/CONOCER", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-
-        lista.add(new Board("LAY",   "TUMBAR A", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("LEAD",  "DIRIGIR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("LEAVE", "SALIR/DEJAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("LEND",  "PRESTAR/DAR/EMPRESTAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("LET",   "DEJAR/ALQUILER/PERMITIR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("LIE",   "MENTIR/EMBUSTE", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("LOSE",  "PERDER/SERVENCIDO", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("MAKE",  "HACER/EFECTUAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("MEAN",  "SIGNIFICAR/SUPONER", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("MEET", "CONOCER/REUNIRSE", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("MUST", "DEBER/TENER QUE", "", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("PAY", "PAGAR/ABONAR/SALARIO", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("PUT", "PONER/COLOCAR/DEJAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("READ", "LEER/INTERPRETAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("RIDE", "MONTAR/PASEO/VIAJAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("RING", "SONAR/TOCAR/LLAMAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("RISE", "ASCENDER/SUBIR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("RUN", "CORRER/EJECUTAR", "", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("SAY", "DECIR/AFIRMAR/EXPRESAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("SEE", "VER/MIRAR/CONSULTAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SELL", "VENDER", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SEND", "ENVIAR/MANDAR/EMITIR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SET", "ESTABLECER/CONJUNTO", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SHAKE", "SACUDIR/AGITAR/MENEAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SHINE", "BRILLAR/RESPLANDECER/LUCIR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("SHOOT", "DISPARAR/TIRAR/LANZAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SHOW", "MOSTRAR/ESPECTACULO", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SHRINK", "ENCOGER/CONTRAER", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SHUT", "CERRAR/CERRARSE", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SING", "CANTAR/SILBAR/ZUMBAR", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SINK", "HUNDIR/CAER/HUNDIRSE", "I KNOW", soundsGlobal[0], color[2], coloText[2]));
-        lista.add(new Board("SIT", "SENTARSE/QUEDARSE/POSAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SLEEP", "DORMIR/ENTUMECERSE", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SLIDE", "DESLIZARSE/DESLIZAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SPEAK", "HABLAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SPEND", "GASTAR/AGOTAR/PASAR", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SPLIT", "DIVIDIRSE/PARTIR/DIVISION", "I KNOW", soundsGlobal[0], color[3], coloText[3]));
-        lista.add(new Board("SPREAD", "DIFUNDIR/PROPAGAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("STAND", "ESTAR/AGUANTAR/TOLERAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("STEAL", "ROBAR/HURTAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("STICK", "PEGARSE/PEGAR/ADHERIRSE", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("SWEAR", "JURAR/MALDECIR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("SWIM", "NADAR", "I KNOW", soundsGlobal[0], color[4], coloText[4]));
-        lista.add(new Board("TAKE", "TOMAR/LLEVAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("TEACH", "ENSEÑAR/DAR/SERPROFESOR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("TEAR", "RASGAR/ARRANCAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("TELL", "CONTAR/DECIR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("THINK", "PENSAR/CREER/CONSIDERAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("THROW", "LANZAR/TIRAR/ARROJAR", "I KNOW", soundsGlobal[0], color[0], coloText[0]));
-        lista.add(new Board("UNDERSTAND", "ENTENDER/COMPRENDER", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("WAKE", "DESPERTAR/VELAR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("WEAR", "USAR/PONSERSE/VESTIR", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("WIN", "GANAR/ALCANZAR/VENCER", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-        lista.add(new Board("WRITE", "ESCRIBIR/COMPONER", "I KNOW", soundsGlobal[0], color[1], coloText[1]));
-    }
+   }
     /*
     public void Home(){
         lista = new ArrayList<>();
