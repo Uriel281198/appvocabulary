@@ -3,9 +3,13 @@ package sooyer.developer.com.palabrasandwords.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +33,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,54 +44,68 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import sooyer.developer.com.palabrasandwords.Adapters.WordAdapter;
+import sooyer.developer.com.palabrasandwords.Common.Common;
 import sooyer.developer.com.palabrasandwords.Database.WordRepository;
 import sooyer.developer.com.palabrasandwords.Local.WordDataSource;
 import sooyer.developer.com.palabrasandwords.Local.WordDatabase;
 import sooyer.developer.com.palabrasandwords.Models.Word;
 import sooyer.developer.com.palabrasandwords.R;
 
+import static sooyer.developer.com.palabrasandwords.Common.Common.changeThemeGlobal;
+import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
 
 
 public class Word_Activity extends AppCompatActivity {
 
-
-    final String LANGUAGE_PAIR =  "en-es";
+    //List y adapters
     private ListView lsWord;
-    List<Word> wordList= new ArrayList<>();
-    WordAdapter adapter;
+    private List<Word> wordList= new ArrayList<>();
+    private WordAdapter adapter;
 
+    //Base de datos Local
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
 
-    Context context=this;
+    private Context context=this;
 
-
-    FloatingActionButton fab ;
-    private Button btnSend;
-    private Button btnCancel;
-    private Button btnTras;
-
+    private FloatingActionButton fab ;
+    private Button btnSend,btnCancel,btnTras;
 
     public View mView;
-    EditText txtpalabra;
-    EditText txtejemplo;
-    EditText txttraduccion;
+    private EditText txtpalabra , txttraduccion;
+
+    private Button btnmorado;
+    private Button btngris;
+    private Button btnrojo;
+    private Button btnverde;
+    private Button btnazul;
+
+    private int indice = 0;
+    int color =       R.drawable.gradientazul_opaco;
+    int colorTexto =  R.color.colorAzul;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+       changeThemeGlobal(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_);
-        setToolbar("INSERT",false);
-
+        setToolbar("MY WORDS",true);
         compositeDisposable= new CompositeDisposable();
+        //Obtenicion id's
         lsWord= findViewById(R.id.lsWord);
         fab = findViewById(R.id.fab_button);
+        //Adapatador de palabras
         adapter = new WordAdapter(getApplicationContext(),wordList);
         registerForContextMenu(lsWord);
         lsWord.setAdapter(adapter);
 
+        //Database traer instancia
         WordDatabase wordDatabase = WordDatabase.getInstance(this);
         wordRepository = WordRepository.getIstance(WordDataSource.getIstance(wordDatabase.WordDAO()));
+        //Cargar datos de la bd
         loadData();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,67 +114,130 @@ public class Word_Activity extends AppCompatActivity {
                 AlertDialog.Builder mbuilder = new AlertDialog.Builder(Word_Activity.this);
                 mView = getLayoutInflater().inflate(R.layout.dialog_word, null);
                 mbuilder.setView(mView);
+
                 final AlertDialog dialog = mbuilder.create();
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-
-                btnSend = mView.findViewById(R.id.btn_mostrarinfo);
-                btnCancel = mView.findViewById(R.id.btn_cancelar);
-                btnTras = mView.findViewById(R.id.btn_traslate);
-                txttraduccion =  mView.findViewById(R.id.txttraduccion);
-                txtpalabra =  mView.findViewById(R.id.txtpalabra);
-                txtejemplo = mView.findViewById(R.id.txtejemplo);
-
-
+                getIds();
                 btnTras.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!TextUtils.isEmpty(txtpalabra.getText())){
-                            Translate(txtpalabra.getText().toString(),LANGUAGE_PAIR);
-                            Toast.makeText(Word_Activity.this, "lol", Toast.LENGTH_SHORT).show();
-                        }else{
+                        if (!TextUtils.isEmpty(txtpalabra.getText()))
+                            Translate(txtpalabra.getText().toString(), Common.LANGUAGE_PAIR);
+                        else
                             Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
 
-                btnSend.setOnClickListener(new View.OnClickListener() {
 
-
+                btnmorado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (TextUtils.isEmpty(txtejemplo.getText()))
-                            txtejemplo.setText("There aren´t examples");
+                            btnmorado.setBackgroundResource(R.drawable.shape_colorselecc);
+                            btngris.setBackgroundResource(R.drawable.shape_gris);
+                            btnazul.setBackgroundResource(R.drawable.shape_blue);
+                            btnrojo.setBackgroundResource(R.drawable.shape_red);
+                            btnverde.setBackgroundResource(R.drawable.shape_green);
+                            color =R.drawable.gradientcmorado;
+                            colorTexto = R.color.colorMorado;
+                    }
+                });
+                btngris.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_grisselecc);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
+                        //btngris.setBackgroundColor(ContextCompat.getColor(getBaseContext(),));
+                        //btngris.setBackground(getResources().getDrawable(R.drawable.shape_grisselecc));
+                        btngris.setBackgroundResource(R.drawable.shape_grisselecc);
+                        color =R.drawable.gradientcgris;
+                        colorTexto = R.color.colorGris;
+                    }
+                });
+                btnrojo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcrojo;
+                        colorTexto = R.color.colorRojo;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_redselecc);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
 
-                        Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
-                            @Override
-                            public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                                Word word = new Word(txtpalabra.getText().toString(),txttraduccion.getText().toString(), txtejemplo.getText().toString());
-                                wordList.add(word);
-                                wordRepository.insertWord(word);
-                                e.onComplete();
-                            }
-                        })
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(new Consumer<Object>() {
+                    }
+                });
+                btnverde.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientcverde;
+                        colorTexto = R.color.colorVerde;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blue);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_greenselecc);
 
-                                    @Override
-                                    public void accept(Object o) throws Exception {
-                                        Toast.makeText(Word_Activity.this, "Sucecfully", Toast.LENGTH_SHORT).show();
-                                        Log.e("lolllll",""+wordList.toString());
-                                    }
-                                },new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
-                                        Toast.makeText(Word_Activity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }, new Action() {
-                                    @Override
-                                    public void run() throws Exception {
-                                        loadData();
-                                    }
-                                });
-                        dialog.dismiss();
+                    }
+                });
+                btnazul.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        color =R.drawable.gradientazul_opaco;
+                        colorTexto = R.color.colorAzul;
+                        btnmorado.setBackgroundResource(R.drawable.shape_color);
+                        btngris.setBackgroundResource(R.drawable.shape_gris);
+                        btnazul.setBackgroundResource(R.drawable.shape_blueselecc);
+                        btnrojo.setBackgroundResource(R.drawable.shape_red);
+                        btnverde.setBackgroundResource(R.drawable.shape_green);
+
+                    }
+                });
+
+
+                btnSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (TextUtils.isEmpty(txtpalabra.getText())){
+                            Toast.makeText(Word_Activity.this, "INSERT A WORD PLEASE", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                                    Word word = new Word(txtpalabra .getText().toString(),txttraduccion.getText().toString(),color,colorTexto);
+                                    wordList.add(word);
+                                    wordRepository.insertWord(word);
+                                    e.onComplete();
+                                }
+                            })
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe(new Consumer<Object>() {
+
+                                        @Override
+                                        public void accept(Object o) throws Exception {
+                                            Toast.makeText(Word_Activity.this, "Sucecfully", Toast.LENGTH_SHORT).show();
+                                            Log.e("lolllll",""+wordList.toString());
+                                        }
+                                    },new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            Toast.makeText(Word_Activity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }, new Action() {
+                                        @Override
+                                        public void run() throws Exception {
+                                            loadData();
+                                        }
+                                    });
+                            dialog.dismiss();
+                        }
+
                     }
                 });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +247,36 @@ public class Word_Activity extends AppCompatActivity {
                     }
                 });
             }
+            public void getIds(){
+                btnSend = mView.findViewById(R.id.btn_mostrarinfo);
+                btnCancel = mView.findViewById(R.id.btn_cancelar);
+                btnTras = mView.findViewById(R.id.btn_traslate);
+                txttraduccion =  mView.findViewById(R.id.txttraduccion);
+                txtpalabra =  mView.findViewById(R.id.txtpalabra);
+
+                btnmorado = mView.findViewById(R.id.send_purple);
+                btngris = mView.findViewById(R.id.send_gray);
+                btnrojo = mView.findViewById(R.id.send_red);
+                btnverde = mView.findViewById(R.id.send_green);
+                btnazul = mView.findViewById(R.id.send_blue);
+            }
         });
+
+        cargarpreferencias();
+    }
+
+    private void cargarpreferencias() {
+        SharedPreferences preferences = getSharedPreferences("istrue",MODE_PRIVATE);
+        Boolean valor = preferences.getBoolean("esverdad",true);
+        istrue = valor;
+    }
+
+    private void guardarpreferencia(){
+        SharedPreferences preferences = getSharedPreferences("istrue",MODE_PRIVATE);
+        Boolean valor = istrue;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("esverdad",valor);
+        editor.commit();
     }
 
     private void Translate(String textToBeTranslated,String languagePair){
@@ -210,6 +322,17 @@ public class Word_Activity extends AppCompatActivity {
         {
             case R.id.clear:
                 deleteallUser();
+            break;
+            case R.id.show:
+                if (istrue != false){
+                    istrue = false;
+
+                    adapter.notifyDataSetChanged();
+                }else if (istrue !=true){
+
+                    istrue = true;
+                    adapter.notifyDataSetChanged();
+                }
             break;
         }
         return super.onOptionsItemSelected(item);
@@ -269,7 +392,7 @@ public class Word_Activity extends AppCompatActivity {
                 edtraduccion.setText(word.getTraslate());
                 edtraduccion.setHint("Enter Traslate");
 
-                final Dialog dialog = new Dialog(this);
+                final Dialog dialog = new Dialog(this); 
                 new AlertDialog.Builder(Word_Activity.this)
                         .setTitle("Edit")
                         .setMessage("Edit Word")
@@ -379,11 +502,13 @@ public class Word_Activity extends AppCompatActivity {
     public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
         //Declare Context
         Context ctx;
+        android.app.AlertDialog alertDialog;
 
         //Set Context
         public TranslatorBackgroundTask(Context ctx) {
             this.ctx = ctx;
         }
+
 
         @Override
         protected String doInBackground(String... params) {
@@ -439,11 +564,17 @@ public class Word_Activity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+             alertDialog= new
+                    SpotsDialog.Builder().setContext(ctx).build();
+            alertDialog.setTitle("Tralate");
+            alertDialog.setMessage("Please wait.....");
+            alertDialog.show();
         }
 
         @Override
         protected void onPostExecute(String result) {
             txttraduccion.setText(result);
+            alertDialog.dismiss();
         }
 
         @Override

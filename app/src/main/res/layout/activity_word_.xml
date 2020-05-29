@@ -12,7 +12,8 @@
     </include>
 
     <ListView
-        android:layout_margin="5dp"
+
+        android:layout_margin="20dp"
         android:layout_below="@+id/nose"
         android:id="@+id/lsWord"
         android:layout_width="match_parent"
@@ -21,8 +22,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:layout_alignParentBottom="true"
+        android:src="@drawable/mas"
+        app:borderWidth="0dp"
+        android:elevation="10dp"
+
         android:layout_alignParentEnd="true"
         android:id="@+id/fab_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:layout_width="40dp"
+        android:layout_height="50dp" />
 </RelativeLayout>

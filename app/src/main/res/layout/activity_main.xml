@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sooyer.developer.com.palabrasandwords.Activities.MainActivity">
+    android:theme="@style/SplahsScreen"
+    tools:context="sooyer.developer.com.palabrasandwords.Activities.MainActivity"
+    >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="328dp"
+        android:layout_height="428dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_home__splash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
-        android:layout_centerInParent="true"
-        android:id="@+id/trasla"
-        android:layout_width="wrap_content"
+        android:id="@+id/notificacion"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:fontFamily="@font/aldrich"
+        android:text="English Vocabulary in your Hand"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.391"></TextView>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

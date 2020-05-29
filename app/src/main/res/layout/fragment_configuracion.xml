@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ConfiguracionFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+   <android.support.constraint.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+
+       <TextView
+           android:id="@+id/textView3"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Select your favorite color"
+           app:layout_constraintBottom_toTopOf="@+id/btn_fragment"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <Button
+           android:id="@+id/btn_fragme2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/btn_fragment"
+           android:layout_centerInParent="true"
+           android:layout_marginBottom="168dp"
+           android:text="Verde"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.498"
+           app:layout_constraintStart_toStartOf="parent" />
+
+       <Button
+           android:id="@+id/btn_fragment"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+           android:layout_marginBottom="64dp"
+           android:text="Red"
+           app:layout_constraintBottom_toTopOf="@+id/btn_fragme"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.498"
+           app:layout_constraintStart_toStartOf="parent" />
+
+       <Button
+           android:id="@+id/btn_fragme"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/btn_fragment"
+           android:layout_centerInParent="true"
+           android:layout_marginBottom="136dp"
+           android:text="Blue"
+           app:layout_constraintBottom_toTopOf="@+id/btn_fragme2"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.498"
+           app:layout_constraintStart_toStartOf="parent" />
+   </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

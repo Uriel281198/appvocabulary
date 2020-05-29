@@ -22,8 +22,6 @@ public interface WordDao {
     @Query("Select * from words")
     Flowable<List<Word>> getAllWord();
 
-
-
     @Insert
     void insertWord(Word...words);
 
