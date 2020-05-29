@@ -33,7 +33,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>  {
 
 
     List<Board> lista;
-    List<Verbs> verbs;
+
 
     public CategoryAdapter(Context nCtx, List<Category> categoryList) {
         this.nCtx = nCtx;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="sooyer.developer.com.palabrasandwords.Activities.TestActivity">
+    tools:context="sooyer.developer.com.palabrasandwords.Activities.RememberWordActivity">
     <include
         layout="@layout/toolbarllist"
         android:layout_above="@id/recyclerboard"

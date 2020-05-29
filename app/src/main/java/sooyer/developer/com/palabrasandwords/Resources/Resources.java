@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sooyer.developer.com.palabrasandwords.Models.Board;
+import sooyer.developer.com.palabrasandwords.Models.Verbs;
 import sooyer.developer.com.palabrasandwords.R;
 
 public class Resources {
@@ -22,6 +23,7 @@ public class Resources {
     public static int color[] = {R.drawable.gradienterojo_opaco,R.drawable.gradientazul_opaco,R.drawable.gradientgris_opaco,R.drawable.gradienteverde_opaco,R.drawable.gradientcgris};
     public static int coloText[] ={R.color.colorRosaOpaco,R.color.colorAzulOpaco,R.color.colorMoradoOpaco,R.color.colorVerdeOpaco,R.color.colorAZpaco};
 
+    public static List<Verbs> listLearning = new ArrayList<>();
 
     public static List getIrregular(){
 

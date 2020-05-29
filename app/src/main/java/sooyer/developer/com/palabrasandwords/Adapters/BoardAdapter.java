@@ -1,36 +1,42 @@
 package sooyer.developer.com.palabrasandwords.Adapters;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.Image;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import sooyer.developer.com.palabrasandwords.Activities.DetailBoardActivity;
-import sooyer.developer.com.palabrasandwords.Activities.TestActivity;
-import sooyer.developer.com.palabrasandwords.Activities.Word_Activity;
+import sooyer.developer.com.palabrasandwords.Activities.HomeActivity;
+import sooyer.developer.com.palabrasandwords.Activities.MainActivity;
 import sooyer.developer.com.palabrasandwords.Interface.ItemClickListener;
 import sooyer.developer.com.palabrasandwords.Models.Board;
+import sooyer.developer.com.palabrasandwords.Models.Verbs;
 import sooyer.developer.com.palabrasandwords.R;
+import sooyer.developer.com.palabrasandwords.Util.RemindNotificacion;
 
-import static sooyer.developer.com.palabrasandwords.Common.Common.istrue;
+import static android.content.Context.ALARM_SERVICE;
 import static sooyer.developer.com.palabrasandwords.Common.Common.showTraslate;
+import static sooyer.developer.com.palabrasandwords.Resources.Resources.listLearning;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
     private Context nCtx;
@@ -39,6 +45,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     SoundPool sp;
     int audio [ ] = {};
     int sonido;
+    private EditText txtpalabra , txttraduccion;
     ItemClickListener itemClickListener;
     public View mView;
 
@@ -102,6 +109,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                     TextView txtpastap2 =  vista.findViewById(R.id.txtsimplepast2);
                     TextView txtpastpa =  vista.findViewById(R.id.txtsimplepast);
                     ImageView img = vista.findViewById(R.id.dialog_back);
+                    final Switch  isLearning = vista.findViewById(R.id.isLearning);
                     Button btn = vista.findViewById(R.id.btn_sound);
                     Button btnCloseAlert = vista.findViewById(R.id.close_alert);
                     txtpastpa.setText(board.getPastParticple().toUpperCase());
@@ -115,6 +123,32 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                     txte.setText(board.getSimplePast().toUpperCase());
                     txtp.setTextColor(nCtx.getResources().getColor(board.getColortexto()));
                     txtt.setText(board.getTraduccion().toUpperCase());
+                    isLearning.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isLearning.isChecked()){
+                                listLearning.add(new Verbs(board.getPalabra(),board.getTraduccion()));
+                                Toast.makeText(nCtx, listLearning.get(0).getWord(), Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(nCtx, "Send", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(nCtx, RemindNotificacion.class);
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(nCtx,0,intent,0);
+                                AlarmManager alarmManager = (AlarmManager) nCtx.getSystemService(ALARM_SERVICE);
+
+
+                                long timeAtClick = System.currentTimeMillis();
+                                long tenSeconds = 1000*10;
+                                alarmManager.setExact(
+                                        AlarmManager.RTC_WAKEUP
+                                        ,timeAtClick+tenSeconds,
+                                        pendingIntent
+                                );
+
+                            }else{
+                                Toast.makeText(nCtx, "Apagado", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
                     img.setImageDrawable(nCtx.getResources().getDrawable(board.getColor()));
 
@@ -196,6 +230,34 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public void updateList(List<Board> newList){
         BoardList = newList;
         notifyDataSetChanged();
+    }
+}
+
+
+class Remind extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        Intent resultIntent = new Intent(context, HomeActivity.class);
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+        // Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notify")
+                .setSmallIcon(R.drawable.view)
+                .setContentTitle("Yes it can")
+                .setContentText("Hey")
+                .setContentIntent(resultPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+
+        notificationManagerCompat.notify(200,builder.build());
     }
 }
 

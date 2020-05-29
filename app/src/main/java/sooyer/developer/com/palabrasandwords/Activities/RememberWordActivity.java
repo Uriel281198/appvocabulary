@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import sooyer.developer.com.palabrasandwords.R;
 
-public class TestActivity extends AppCompatActivity {
+public class RememberWordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

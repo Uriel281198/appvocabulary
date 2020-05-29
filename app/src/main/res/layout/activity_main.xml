@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
+        android:id="@+id/notificacion"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aldrich"

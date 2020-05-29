@@ -7,31 +7,20 @@ import java.util.ArrayList;
  */
 
 public class Verbs {
-    private String palabra;
-    private String traduccion;
-    private String simple;
-    private String participic;
-    private int audio;
-    private int color;
-    private int colortexto;
+        String word;
+        String traduccion;
 
-
-    public Verbs(String palabra, String traduccion, String simple, String participic, int audio, int color, int colortexto) {
-        this.palabra = palabra;
+    public Verbs(String word, String traduccion) {
+        this.word = word;
         this.traduccion = traduccion;
-        this.simple = simple;
-        this.participic = participic;
-        this.audio = audio;
-        this.color = color;
-        this.colortexto = colortexto;
     }
 
-    public String getPalabra() {
-        return palabra;
+    public String getWord() {
+        return word;
     }
 
-    public void setPalabra(String palabra) {
-        this.palabra = palabra;
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getTraduccion() {
@@ -40,46 +29,6 @@ public class Verbs {
 
     public void setTraduccion(String traduccion) {
         this.traduccion = traduccion;
-    }
-
-    public String getSimple() {
-        return simple;
-    }
-
-    public void setSimple(String simple) {
-        this.simple = simple;
-    }
-
-    public String getParticipic() {
-        return participic;
-    }
-
-    public void setParticipic(String participic) {
-        this.participic = participic;
-    }
-
-    public int getAudio() {
-        return audio;
-    }
-
-    public void setAudio(int audio) {
-        this.audio = audio;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    public int getColortexto() {
-        return colortexto;
-    }
-
-    public void setColortexto(int colortexto) {
-        this.colortexto = colortexto;
     }
 }
 /*

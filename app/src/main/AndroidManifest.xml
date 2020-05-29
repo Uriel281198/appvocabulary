@@ -25,12 +25,16 @@
         <activity
             android:name=".Activities.Word_Activity"
             android:parentActivityName=".Activities.BoardActivity" />
-        <activity android:name=".Activities.DetailBoardActivity" />
-        <activity android:name=".Activities.TestActivity"></activity>
-        
+        <activity android:name=".Activities.RememberWordActivity"></activity>
+
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver android:name=".Util.RemindNotificacion"/>
+
     </application>
 
 </manifest>
