@@ -11,14 +11,13 @@
         >
     </include>
 
-    <ListView
-
-        android:layout_margin="20dp"
+    <ListVie
+        android:layout_margin="10dp"
         android:layout_below="@+id/nose"
         android:id="@+id/lsWord"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+    </ListVie>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_alignParentBottom="true"

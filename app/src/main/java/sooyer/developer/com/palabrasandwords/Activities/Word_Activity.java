@@ -65,21 +65,16 @@ public class Word_Activity extends AppCompatActivity {
     //Base de datos Local
     private CompositeDisposable compositeDisposable;
     private WordRepository wordRepository;
-
     private Context context=this;
-
     private FloatingActionButton fab ;
     private Button btnSend,btnCancel,btnTras;
-
     public View mView;
     private EditText txtpalabra , txttraduccion;
-
     private Button btnmorado;
     private Button btngris;
     private Button btnrojo;
     private Button btnverde;
     private Button btnazul;
-
     private int indice = 0;
     int color =       R.drawable.gradientazul_opaco;
     int colorTexto =  R.color.colorAzul;
@@ -139,7 +134,7 @@ public class Word_Activity extends AppCompatActivity {
                             btnazul.setBackgroundResource(R.drawable.shape_blue);
                             btnrojo.setBackgroundResource(R.drawable.shape_red);
                             btnverde.setBackgroundResource(R.drawable.shape_green);
-                            color =R.drawable.gradientcmorado;
+                            color =R.drawable.gradientemorado_opaco;
                             colorTexto = R.color.colorMorado;
                     }
                 });
@@ -154,14 +149,14 @@ public class Word_Activity extends AppCompatActivity {
                         //btngris.setBackgroundColor(ContextCompat.getColor(getBaseContext(),));
                         //btngris.setBackground(getResources().getDrawable(R.drawable.shape_grisselecc));
                         btngris.setBackgroundResource(R.drawable.shape_grisselecc);
-                        color =R.drawable.gradientcgris;
+                        color =R.drawable.gradientgris_opaco;
                         colorTexto = R.color.colorGris;
                     }
                 });
                 btnrojo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        color =R.drawable.gradientcrojo;
+                        color =R.drawable.gradienterojo_opaco;
                         colorTexto = R.color.colorRojo;
                         btnmorado.setBackgroundResource(R.drawable.shape_color);
                         btngris.setBackgroundResource(R.drawable.shape_gris);
@@ -174,7 +169,7 @@ public class Word_Activity extends AppCompatActivity {
                 btnverde.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        color =R.drawable.gradientcverde;
+                        color =R.drawable.gradienteverde_opaco;
                         colorTexto = R.color.colorVerde;
                         btnmorado.setBackgroundResource(R.drawable.shape_color);
                         btngris.setBackgroundResource(R.drawable.shape_gris);
@@ -499,6 +494,8 @@ public class Word_Activity extends AppCompatActivity {
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(up);
     }
+
+
     public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
         //Declare Context
         Context ctx;

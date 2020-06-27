@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         spaceNavigationView =  findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.home));
-        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.home));
+        spaceNavigationView.addSpaceItem(new SpaceItem("MODULES", R.drawable.home));
         spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
